@@ -29,9 +29,7 @@
     <chain input-channel="predictions" output-channel="chat">
         <si-xml:xpath-transformer xpath-expression="/body/predictions/direction/prediction[1]/@minutes" evaluation-type="NUMBER_RESULT"/>
         <filter expression="payload lt 30"/>
-        <xmpp:header-enricher>
-            <xmpp:message-to value="${user-to-notify}"/>
-        </xmpp:header-enricher>
+        <xmpp:header-enricher> <xmpp:message-to value="${user-to-notify}"/> </xmpp:header-enricher>
         <transformer expression="'the bus departs in ' + payload + ' minutes'"/>
     </chain>
 
@@ -39,8 +37,6 @@
     
     <xmpp:message-outbound-channel-adapter channel="chat" xmpp-connection="xmppConnection"/>
 
-    <xmpp:xmpp-connection id="xmppConnection"
-                  user="${jabber-user}" password="${jabber-password}"
-                  host="jabber.org" port="5222" service-name="jabber.org"/>
+    <xmpp:xmpp-connection id="xmppConnection" user="${jabber-user}" password="${jabber-password}" host="jabber.org" port="5222" service-name="jabber.org"/>
 
 </beans:beans>

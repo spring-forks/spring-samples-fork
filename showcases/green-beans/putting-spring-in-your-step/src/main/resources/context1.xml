@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/jdbc
+                           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="org.springframework.samples"/>
+
+    <!--<bean id="ds" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean">
+        <property name="databaseType" value="H2"/>
+        <property name="databasePopulator">
+            <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+                <property name="scripts" value="setup.sql"/>
+            </bean>
+        </property>
+    </bean>-->
+
+    <jdbc:embedded-database id="ds" type="H2">
+        <jdbc:script location="classpath:setup.sql"/>
+    </jdbc:embedded-database>
+
+    <!--<bean id="ds" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/cs"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>-->
+
+<!--    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <constructor-arg ref="ds"/>
+    </bean>-->
+<!--
+
+-->
+<!--
+
+    <bean class="org.springframework.samples.DatabaseCustomerService" id="databaseCustomerService">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+ --><!--
+    <bean class="org.springframework.samples.CustomerClient" id="client">
+        <property name="customerService" ref="databaseCustomerService"/>
+    </bean>-->
+
+</beans>
