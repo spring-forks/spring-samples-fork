@@ -14,7 +14,7 @@
 
     <context:property-placeholder location="accounts.properties"/>
 
-    <inbound-channel-adapter expression="${zip}" id="requests">
+    <inbound-channel-adapter expression="${stop-id}" id="requests">
         <poller fixed-delay="30000"/>
     </inbound-channel-adapter>
 
