@@ -5,10 +5,8 @@ CREATE TABLE CUSTOMERS (
     LAST_NAME VARCHAR,
     EMAIL VARCHAR,
     ID SERIAL
-)  ; 
+);
 
 INSERT INTO CUSTOMERS(FIRST_NAME , LAST_NAME , EMAIL ) VALUES( 'john', 'doe', 'jdoe@email.com');
 INSERT INTO CUSTOMERS(FIRST_NAME , LAST_NAME , EMAIL ) VALUES( 'bob', 'smith', 'bsmith@email.com');
 INSERT INTO CUSTOMERS(FIRST_NAME , LAST_NAME , EMAIL ) VALUES( 'jane', 'doe', 'jadoe@email.com');
-
-
