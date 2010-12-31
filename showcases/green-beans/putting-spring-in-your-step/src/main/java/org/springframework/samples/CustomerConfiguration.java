@@ -10,10 +10,11 @@ import javax.sql.DataSource;
 @Configuration
 public class CustomerConfiguration {
 
-	@Autowired private DataSource dataSource;
+  @Autowired
+  private DataSource dataSource;
 
-	@Bean
-	public JdbcTemplate simpleJdbcTemplate() {
-		return new JdbcTemplate(this.dataSource);
-	}
+  @Bean
+  public JdbcTemplate simpleJdbcTemplate() {
+    return new JdbcTemplate(this.dataSource);
+  }
 }

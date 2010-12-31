@@ -11,26 +11,26 @@ import java.sql.SQLException;
 @Component
 public class DatabaseCustomerService implements CustomerService {
 
-	private JdbcTemplate jdbcTemplate;
-    private RowMapper<Customer> customerRowMapper = new CustomerRowMapper();
- 
-    public Customer getCustomerById(long id) {
-		return jdbcTemplate.queryForObject(
-				"select * from CUSTOMERS where ID = ?", this.customerRowMapper, id);
-    }
+  private JdbcTemplate jdbcTemplate;
+  private RowMapper<Customer> customerRowMapper = new CustomerRowMapper();
 
-	@Autowired
-    public void setJdbcTemplate( JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+  public Customer getCustomerById(long id) {
+    return jdbcTemplate.queryForObject(
+        "select * from CUSTOMERS where ID = ?", this.customerRowMapper, id);
+  }
 
-    class CustomerRowMapper implements RowMapper<Customer> {
-        public Customer mapRow(ResultSet resultSet, int i)  throws SQLException {
-            String fn = resultSet.getString("FIRST_NAME");
-            String ln = resultSet.getString("LAST_NAME");
-            String email = resultSet.getString("EMAIL");
-            long id = resultSet.getInt("ID");
-            return new Customer(id, fn, ln, email);
-        }
+  @Autowired
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
+  }
+
+  class CustomerRowMapper implements RowMapper<Customer> {
+    public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+      String fn = resultSet.getString("FIRST_NAME");
+      String ln = resultSet.getString("LAST_NAME");
+      String email = resultSet.getString("EMAIL");
+      long id = resultSet.getInt("ID");
+      return new Customer(id, fn, ln, email);
     }
+  }
 }
