@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springsource.examples.crm.services.config.CrmConfiguration;
 
@@ -28,7 +29,9 @@ public class JpaConfiguration extends CrmConfiguration {
   // this is required to replace JpaTemplate's exception translation
   @Bean
   public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
-    return new PersistenceExceptionTranslationPostProcessor();
+    PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor =  new PersistenceExceptionTranslationPostProcessor();
+    persistenceExceptionTranslationPostProcessor.setRepositoryAnnotationType( Service.class);
+    return persistenceExceptionTranslationPostProcessor;
   }
 
   @Bean

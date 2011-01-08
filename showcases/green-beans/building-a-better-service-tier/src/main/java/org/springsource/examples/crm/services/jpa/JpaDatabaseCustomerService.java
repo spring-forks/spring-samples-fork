@@ -24,7 +24,7 @@ public class JpaDatabaseCustomerService implements CustomerService {
     Customer newCustomer = new Customer();
     newCustomer.setFirstName(fn);
     newCustomer.setLastName(ln);
-    this.entityManager.persist(newCustomer);
+    this.entityManager.persist(null);
     return newCustomer;
   }
 }
