@@ -7,7 +7,8 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
 
-@Configuration
+
+//@Configuration
 public class CrmConfiguration {
 
     @Value("${dataSource.driverClassName}")
