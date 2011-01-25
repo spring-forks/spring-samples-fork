@@ -4,22 +4,20 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import org.springsource.examples.crm.model.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class JdbcTemplateCustomerRepository implements CustomerRepository, InitializingBean {
-
 
   @Value("${jdbc.sql.customers.queryById}")
   private String customerByIdQuery;
@@ -31,18 +29,17 @@ public class JdbcTemplateCustomerRepository implements CustomerRepository, Initi
   private JdbcTemplate jdbcTemplate;
 
   public Customer saveCustomer(Customer customer) {
-    GeneratedKeyHolder holder = new GeneratedKeyHolder();
 
-    PreparedStatementCreatorFactory preparedStatementCreatorFactory =
-        new PreparedStatementCreatorFactory(insertCustomerQuery, new int[]{Types.VARCHAR, Types.VARCHAR});
-    preparedStatementCreatorFactory.setReturnGeneratedKeys(true);
-    preparedStatementCreatorFactory.setGeneratedKeysColumnNames(new String[]{"id"});
+    SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+    simpleJdbcInsert.setTableName("customer");
+    simpleJdbcInsert.setColumnNames(Arrays.asList("first_name", "last_name"));
+    simpleJdbcInsert.setGeneratedKeyName("id");
 
-    PreparedStatementCreator psc = preparedStatementCreatorFactory.newPreparedStatementCreator(Arrays.asList(customer.getFirstName(), customer.getLastName()));
-    jdbcTemplate.update(psc, holder);
+    Map<String, Object> args = new HashMap<String, Object>();
+    args.put("first_name", customer.getFirstName());
+    args.put("last_name", customer.getLastName());
 
-    Number id = holder.getKey();
-
+    Number id = simpleJdbcInsert.execute(args);
     return getCustomerById(id.longValue());
   }
 
