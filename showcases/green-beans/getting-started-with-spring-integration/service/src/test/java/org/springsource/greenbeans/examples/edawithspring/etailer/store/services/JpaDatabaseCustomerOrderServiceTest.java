@@ -33,6 +33,7 @@ import static org.junit.Assert.assertTrue;
  * @author Josh Long
  */
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/services.xml"})
 public class JpaDatabaseCustomerOrderServiceTest {
