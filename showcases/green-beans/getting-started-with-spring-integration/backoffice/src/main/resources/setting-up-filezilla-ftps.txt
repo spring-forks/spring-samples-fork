@@ -1,0 +1,43 @@
+#/*
+# * Copyright 2006-2007 the original author or authors.
+# *
+# * Licensed under the Apache License, Version 2.0 (the "License");
+# * you may not use this file except in compliance with the License.
+# * You may obtain a copy of the License at
+# *
+# *      http://www.apache.org/licenses/LICENSE-2.0
+# *
+# * Unless required by applicable law or agreed to in writing, software
+# * distributed under the License is distributed on an "AS IS" BASIS,
+# * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# * See the License for the specific language governing permissions and
+# * limitations under the License.
+# */
+
+
+
+
+ - install open-source filezilla ftp server (i had to use a windows VM to run it...)
+ - setup a new account in filezilla:
+   -- go to groups and setup a group (for the purposes of testing, obviously, vary this according to your needs esp. in prod) that had the following settings:
+    --- General: check 'Force SSL for user login', check 'Enable access for users inside group'
+    --- Shared Folders: create a directory, and give it a path like: 'C:/user_ftp_data/:u' - the last ':u' will automatically be replaced by the login of the user. Thus, if I login as 'jlong', a path 'C:/user_ftp_data/jlong' will be created. Make sure to give the user all permissions, and check 'Autocreate', too.
+     --- Hit OK
+   -- go to users and setup a new user. choose the group we just created and add that user.
+
+ - go the 'general' window. Find 'SSL/TLS settings' on the left. You neeed to provide a certificate. FZ will let you generate one right there from within the window by clicking 'Generate new certificate'. Note the path that file is saved to. In my case, it waa c:/certs/cert.crt. Make sure 'Enable FTP over SSL/TLS support (FTPS)' is checked, along with 'Allow explicit FTP over TLS' and 'Disallow plain unencrypted FTP'. Check 'Force PROT P to encrypt file transfers in SSL/TLS mode.' Select 'OK'
+
+  Now you have your running SSL FTPS server. Java clients need the certificate to be able to talk to it, so its up to you to install the .cert you just created into the JKS (java KeyStore). There are lots of ways to do this, but they're all fairly painful. Instead, just download 'Portcle' from SourceForge. Its an open-source Java UI for keymanagment and its dead simple. I got it from http://sourceforge.net/projects/portecle/files/portecle/1.7/portecle-1.7.zip/download . Run 'java -jar portcle.jar' and when the UI shows up, got to 'Tools'>'Import Trusted Certificate.' Choose the .cert you created in FileZilla and then, your FTPS-based communication (including the Spring Integration adapter) should be ready to go!
+
+
+
+===================================
+
+To connect from FileZilla (the client), create a new site in the site manager and choose :
+ - Host: IP_OF_YOUR_SERVER...
+ - Port: (empty)
+ - Servertype: 'FTPS - FTP over implicit TLS/SSL'
+ - Logontype: 'Normal'
+ - User: YOUR_USER
+ - Password: YOUR_PASSWORD
+

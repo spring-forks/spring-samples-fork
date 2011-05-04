@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+/*
+* Copyright 2006-2007 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+-->
+<xs:schema version="1.0"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="http://greenbeans.springsource.org/integration/shipping/schemas"
+           xmlns:shipping="http://greenbeans.springsource.org/integration/shipping/schemas"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="purchase-processing-request" type="shipping:purchaseProcessingRequest"/>
+
+    <xs:element name="purchase-processing-response" type="shipping:purchaseProcessingResponse"/>
+
+    <xs:complexType name="purchaseProcessingResponse">
+        <!--<xs:sequence/>-->
+        <xs:attribute name="confirmation-date" type="xs:dateTime" use="required"/>
+        <xs:attribute name="customer-id" type="xs:long" use="required"/>
+        <xs:attribute name="purchase-id" type="xs:long" use="required"/>
+        <xs:attribute name="request-confirmation-id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="lineItem">
+        <xs:sequence/>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+        <xs:attribute name="product-id" type="xs:long" use="required"/>
+        <xs:attribute name="fulfillment-date" type="xs:dateTime"/>
+    </xs:complexType>
+
+    <xs:complexType name="purchaseProcessingRequest">
+        <xs:sequence>
+            <xs:element name="purchase-line-items" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="purchase-line-item" type="shipping:lineItem" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="customer-id" type="xs:long" use="required"/>
+        <xs:attribute name="purchase-id" type="xs:long" use="required"/>
+        <xs:attribute name="shipped" type="xs:dateTime"/>
+    </xs:complexType>
+</xs:schema>
+

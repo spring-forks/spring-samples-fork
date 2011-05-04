@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--
+/*
+* Copyright 2006-2007 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ws="http://www.springframework.org/schema/integration/ws"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+       xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.0.xsd
+       http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-2.0.xsd
+       http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+       http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd
+       http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd
+       ">
+
+
+    <context:component-scan base-package="org.springsource.greenbeans.examples.edawithspring.etailer.backoffice"/>
+
+    <context:property-placeholder  location="backoffice.properties"/>
+
+    <int:logging-channel-adapter channel="errorChannel" expression="payload" auto-startup="true"/>
+
+    <int:channel id="partnerShippingReplies"/>
+    <int:channel id="partnerXmlShippingReplies"/>
+    <int:channel id="partnerNotifications"/>
+
+    <int-jms:message-driven-channel-adapter channel="partnerNotifications"
+                                            connection-factory="connectionFactory"
+                                            transaction-manager="jmsTransactionManager"
+                                            acknowledge="transacted"
+                                            destination-name="${jms.partnernotifications.destination}" />
+
+    <ws:outbound-gateway id="shippingWsGateway"
+                         request-channel="partnerNotifications"
+                         reply-channel="partnerXmlShippingReplies"
+                         uri="http://${ws.host}:${ws.port}/${ws.context}shipping" />
+
+    <int-xml:xpath-header-enricher id="xpathHeaderEnricher" input-channel="partnerXmlShippingReplies" output-channel="partnerShippingReplies">
+        <int-xml:header name="purchaseId" xpath-expression="//@purchase-id"/>
+        <int-xml:header name="customerId" xpath-expression="//@customer-id"/>
+        <int-xml:header name="date" xpath-expression="//@confirmation-date"/>
+    </int-xml:xpath-header-enricher>
+
+    <int-jdbc:outbound-channel-adapter
+        data-source="dataSource" id="jdbcInsertOutboundAdapter"
+        channel="partnerShippingReplies" >
+        <int-jdbc:query>
+            INSERT INTO purchase_fulfillment_log( PURCHASE_ID, CUSTOMER_ID, EVENT_DATE, EVENT) VALUES( :headers[purchaseId], :headers[customerId], :headers[date], 'SHIPPED' )
+        </int-jdbc:query>
+    </int-jdbc:outbound-channel-adapter>
+
+</beans>
