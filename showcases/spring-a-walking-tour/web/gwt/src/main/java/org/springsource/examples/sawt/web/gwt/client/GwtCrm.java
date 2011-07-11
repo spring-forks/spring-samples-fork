@@ -24,9 +24,9 @@ public class GwtCrm implements EntryPoint {
 
         RootPanel.get("customerPanelContainer").add(customerPanel);
 
-        crmService.getCustomerById(1L, new AsyncCallback<CustomerDto>() {
+        crmService.getCustomerById( 71L, new AsyncCallback<CustomerDto>() {
             public void onFailure(Throwable throwable) {
-                Window.alert("Holy shit something's very wrong! " + throwable.toString());
+                Window.alert("something's very wrong! " + throwable.toString());
             }
 
             public void onSuccess(CustomerDto customerDto) {
