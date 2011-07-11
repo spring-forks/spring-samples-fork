@@ -15,14 +15,42 @@
  
 
   <properties>
-    <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.3.0</gwtVersion>
-    <!-- GWT needs at least java 1.5 -->
+      <gxt.version>2.0.1</gxt.version>
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
+
+      <dependency>
+     <groupId>com.extjs</groupId>
+     <artifactId>gxt</artifactId>
+     <version>${gxt.version}</version>
+     <scope>provided</scope>
+   </dependency>
+
+        <dependency>
+            <groupId>org.springsource.examples</groupId>
+            <artifactId>core-services</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
@@ -54,6 +82,20 @@
       <classifier>sources</classifier>
       <scope>test</scope>
     </dependency>
+
+      <dependency>
+          <groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>commons-lang</groupId><artifactId>commons-lang</artifactId>
+      </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
   </dependencies>
 
   <build>

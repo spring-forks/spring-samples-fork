@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>org.springsource.examples.sawt.web.gwt.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>org.springsource.examples.sawt.web.gwt.server.GwtCustomerServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>

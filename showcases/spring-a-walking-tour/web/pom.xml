@@ -11,11 +11,15 @@
     <artifactId>web</artifactId>
     <packaging>pom</packaging>
 
-    <modules>   <module>gwt</module> 
-      <module>mvc</module> <module>rest</module> <module>flex</module><module>android</module>
+    <modules>
+        <module>gwt</module>
+        <module>mvc</module>
+        <module>rest</module>
+        <module>flex</module>
+        <module>android</module>
     </modules>
 
-   <dependencyManagement>
+    <dependencyManagement>
         <dependencies>
 
             <dependency>
