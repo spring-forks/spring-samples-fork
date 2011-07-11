@@ -11,6 +11,9 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import org.springsource.examples.sawt.web.gwt.client.entities.CustomerDto;
 
+// todo publish events that require the use of the services using the GWT EventBus. See http://www.google.com/events/io/2009/sessions/GoogleWebToolkitBestPractices.html
+// todo CustomerPanel shouldn't know about the CustomerService, specifically. it should be natural to publish 'customerCreatedEvent' and 'customerUpdatedEvents' and respond to them, appropriately.
+
 public class CustomerPanel extends Composite {
 
     interface CustomerUiBinder extends UiBinder<Widget, CustomerPanel> {
