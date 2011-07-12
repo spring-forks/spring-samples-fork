@@ -17,6 +17,15 @@ public class GwtCustomerServiceImpl extends RemoteServiceServlet implements GwtC
         return (T)  applicationContext.getBean(t);
     }
 
+    public void updateCustomer(long cid, String f, String l) {
+      try {
+            CustomerService customerService = beanOfType(CustomerService.class);
+            customerService.updateCustomer(cid, f,l) ;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     public CustomerDto getCustomerById(long customerId) {
         try {
             CustomerService customerService = beanOfType(CustomerService.class);

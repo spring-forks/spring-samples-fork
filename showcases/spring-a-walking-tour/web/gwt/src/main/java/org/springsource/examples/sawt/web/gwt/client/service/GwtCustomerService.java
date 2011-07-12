@@ -9,7 +9,7 @@ import org.springsource.examples.sawt.web.gwt.client.entities.CustomerDto;
  */
 @RemoteServiceRelativePath("crm")
 public interface GwtCustomerService extends RemoteService {
-
+    void updateCustomer(long cid, String f, String l) ;
     CustomerDto getCustomerById(long customerId);
 
 }
