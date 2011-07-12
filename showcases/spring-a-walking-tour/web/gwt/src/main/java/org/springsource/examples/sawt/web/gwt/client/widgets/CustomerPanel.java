@@ -123,6 +123,7 @@ public class CustomerPanel extends Composite {
         CustomerEvent customerEvent = new CustomerEvent(customerDto1, CustomerEvent.CustomerEventType.UPDATED);
 
         eventBus.fireEvent(customerEvent);
-
+        setCustomerDto(null);
+        disableEditor();
     }
 }
