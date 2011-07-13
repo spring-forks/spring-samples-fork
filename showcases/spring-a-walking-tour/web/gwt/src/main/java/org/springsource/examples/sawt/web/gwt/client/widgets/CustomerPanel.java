@@ -44,6 +44,7 @@ public class CustomerPanel extends Composite {
     @UiField
     Button cancelButton;
 
+
     public void setCustomerDto(CustomerDto customerDto) {
 
         this.customerDto = customerDto;

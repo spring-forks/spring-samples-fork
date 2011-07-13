@@ -13,7 +13,7 @@ import org.springsource.examples.sawt.web.gwt.client.service.GwtCustomerService;
 public class GwtCustomerServiceImpl extends RemoteServiceServlet implements GwtCustomerService {
 
     private <T> T beanOfType(Class t) {
-        ApplicationContext applicationContext =WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
         return (T)  applicationContext.getBean(t);
     }
 
