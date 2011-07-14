@@ -15,33 +15,14 @@
         <module>gwt</module>
         <module>mvc</module>
         <module>rest</module>
-     <module>flex</module> 
+        <module>flex</module>
         <module>android</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
 
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${org.springframework-version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
 
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <dependency>
                 <groupId>org.tuckey</groupId>
                 <artifactId>urlrewritefilter</artifactId>

@@ -24,6 +24,8 @@ public class Client implements InitializingBean {
 		this.customerService = cs;
 	}
 
+    public Client(){ }
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		log.info("Starting Client. CustomerService implementation is "

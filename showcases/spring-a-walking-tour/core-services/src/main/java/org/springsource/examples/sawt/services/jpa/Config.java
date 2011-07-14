@@ -5,14 +5,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springsource.examples.sawt.services.model.Customer;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-// todo migrate to Spring 3.1!
-// todo Caused by: java.lang.IllegalStateException: No persistence units parsed from {classpath*:META-INF/persistence.xml}
 
 @Configuration
 public class Config {
@@ -33,6 +34,12 @@ public class Config {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
+        localContainerEntityManagerFactoryBean.setPackagesToScan( new String []{Customer.class.getPackage().getName()} );
+
+        JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter() ;
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter( jpaVendorAdapter );
+
+        // look ma, no persistence.xml !
         return localContainerEntityManagerFactoryBean;
     }
 
