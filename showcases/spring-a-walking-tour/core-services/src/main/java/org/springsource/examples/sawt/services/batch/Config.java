@@ -80,7 +80,7 @@ public class Config {
     }
 
     @Bean(name = "jobRepository")
-    public JobRepositoryFactoryBean jobRepositoryFactoryBean() throws Exception {
+    public JobRepositoryFactoryBean jobRepository() throws Exception {
         JobRepositoryFactoryBean jobRepositoryFactoryBean = new JobRepositoryFactoryBean();
         jobRepositoryFactoryBean.setDataSource(this.dataSource());
         jobRepositoryFactoryBean.setTransactionManager(this.platformTransactionManager());
@@ -95,7 +95,7 @@ public class Config {
     @Bean
     public SimpleJobLauncher jobLauncher() throws Exception {
         SimpleJobLauncher simpleJobLauncher = new SimpleJobLauncher();
-        simpleJobLauncher.setJobRepository((JobRepository) this.jobRepositoryFactoryBean().getObject());
+        simpleJobLauncher.setJobRepository((JobRepository) this.jobRepository().getObject());
         return simpleJobLauncher;
     }
 

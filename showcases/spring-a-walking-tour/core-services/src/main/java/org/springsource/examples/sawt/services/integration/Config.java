@@ -19,10 +19,7 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource("/org/springsource/examples/sawt/services/batch/context.xml")
 public class Config {
 
-    private Log log = LogFactory.getLog(getClass());
-
-    @Autowired
-    private JobLauncher jobLauncher;
+    @Autowired private JobLauncher jobLauncher;
 
     @Bean
     public JobLaunchingMessageHandler jobMessageHandler() throws Exception {

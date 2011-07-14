@@ -10,8 +10,8 @@
 
     <context:component-scan base-package="org.springsource.examples.sawt.services.jpa"/>
 
-    <context:property-placeholder location="../../../../../../services.properties"/>
 
+    <context:property-placeholder location="/services.properties"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

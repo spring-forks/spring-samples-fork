@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 @Component
 public class JdbcCustomerService implements CustomerService {
 

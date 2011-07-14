@@ -11,6 +11,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+// todo migrate to Spring 3.1!
+// todo Caused by: java.lang.IllegalStateException: No persistence units parsed from {classpath*:META-INF/persistence.xml}
+
 @Configuration
 public class Config {
 
@@ -35,8 +38,7 @@ public class Config {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        LocalContainerEntityManagerFactoryBean wtf= entityManagerFactory();
-        EntityManagerFactory entityManagerFactory = wtf.getObject();
+        EntityManagerFactory entityManagerFactory = entityManagerFactory().getObject();
         return new JpaTransactionManager(entityManagerFactory);
     }
 

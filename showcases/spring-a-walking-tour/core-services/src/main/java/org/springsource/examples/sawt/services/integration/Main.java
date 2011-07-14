@@ -4,7 +4,6 @@ package org.springsource.examples.sawt.services.integration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- *
  * Launches our simple integration solution.
  *
  * @author Josh Long
@@ -14,8 +13,6 @@ public class Main {
 
         ClassPathXmlApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("/org/springsource/examples/sawt/services/integration/context.xml");
-
-
     }
 
 }
