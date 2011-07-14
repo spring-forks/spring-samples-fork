@@ -35,7 +35,8 @@ public class Config {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        EntityManagerFactory entityManagerFactory = entityManagerFactory().getObject();
+        LocalContainerEntityManagerFactoryBean wtf= entityManagerFactory();
+        EntityManagerFactory entityManagerFactory = wtf.getObject();
         return new JpaTransactionManager(entityManagerFactory);
     }
 

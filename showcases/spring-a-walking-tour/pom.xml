@@ -16,6 +16,8 @@
     <properties>
         <com.rabbitmq.version>2.1.0</com.rabbitmq.version>
         <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.1</spring.version>
+
         <spring.amqp.version>1.0.0.M2</spring.amqp.version>
         <activemq.version>5.5.0</activemq.version>
         <spring.ws.version>2.0.1.RELEASE</spring.ws.version>

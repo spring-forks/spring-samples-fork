@@ -13,8 +13,8 @@
     <context:property-placeholder location="classpath:/services.properties"/>
 
     <job id="importData" job-repository="jobRepository">
-        <step id="step1">
-            <tasklet transaction-manager="transactionManager">
+        <step id="step1" >
+            <tasklet transaction-manager="transactionManager"  >
                 <chunk reader="reader" processor="processor" writer="writer" commit-interval="2"/>
             </tasklet>
         </step>

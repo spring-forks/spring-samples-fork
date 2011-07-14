@@ -9,7 +9,8 @@ import org.springsource.examples.sawt.services.model.Customer;
 
 public class Main {
     public static void main(String args[]) throws Throwable {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/org/springsource/examples/sawt/services/jpa/config.xml");
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("/org/springsource/examples/sawt/services/jpa/config.xml");
 
         Log log = LogFactory.getLog(Main.class);
 

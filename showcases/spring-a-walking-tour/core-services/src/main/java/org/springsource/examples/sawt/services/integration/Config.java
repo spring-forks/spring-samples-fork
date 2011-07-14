@@ -9,6 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+/**
+ * Simple integration configuration that also works with configuration previously
+ * defined in the batch solution.
+ *
+ * @author Josh Long
+ */
 @Configuration("integrationConfiguration")
 @ImportResource("/org/springsource/examples/sawt/services/batch/context.xml")
 public class Config {

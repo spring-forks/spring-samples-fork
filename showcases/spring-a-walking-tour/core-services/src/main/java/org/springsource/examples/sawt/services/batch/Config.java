@@ -25,9 +25,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springsource.examples.sawt.services.model.Customer;
 
 import javax.sql.DataSource;
+import java.sql.Driver;
 
 /**
+ * configuration for our batch solution to read data and load it into the CRM.
  *
+ * @author Josh Long
  */
 @Configuration("batchConfiguration")
 public class Config {
@@ -43,12 +46,11 @@ public class Config {
     @Value("${dataSource.user}")
     private String user;
 
-
     @Value("${dataSource.password}")
     private String password;
 
     @Value("${dataSource.driverClass}")
-    private Class driverClassName;
+    private Class<? extends Driver> driverClassName;
 
     @Bean
     public PlatformTransactionManager transactionManager() {
@@ -58,9 +60,9 @@ public class Config {
     @Bean
     public DataSource dataSource() {
         SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
-        simpleDriverDataSource.setPassword(this.password);
-        simpleDriverDataSource.setUrl(this.url);
-        simpleDriverDataSource.setUsername(this.user);
+        simpleDriverDataSource.setPassword(password);
+        simpleDriverDataSource.setUrl(url);
+        simpleDriverDataSource.setUsername(user);
         simpleDriverDataSource.setDriverClass(driverClassName);
         return simpleDriverDataSource;
     }
@@ -98,17 +100,6 @@ public class Config {
     }
 
     @Bean
-    public ItemProcessor<Customer, Customer> processor() {
-        return new ItemProcessor<Customer, Customer>() {
-            @Override
-            public Customer process(Customer item) throws Exception {
-                log.info(String.format("processing the customer %s", item.toString()));
-                return item;
-            }
-        };
-    }
-
-    @Bean
     @Scope("step")
     public FlatFileItemReader reader(@Value("#{jobParameters['input.file']}") Resource resource) throws Exception {
 
@@ -130,6 +121,19 @@ public class Config {
         csvFileReader.setLineMapper(defaultLineMapper);
         return csvFileReader;
     }
+
+
+    @Bean
+    public ItemProcessor<Customer, Customer> processor() {
+        return new ItemProcessor<Customer, Customer>() {
+            @Override
+            public Customer process(Customer item) throws Exception {
+                log.info(String.format("processing the customer %s", item.toString()));
+                return item;
+            }
+        };
+    }
+
 
     @Bean  // thread safe and stateless, no need to make it step-scoped.
     public JdbcBatchItemWriter writer() {
