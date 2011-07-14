@@ -15,7 +15,7 @@
         <module>gwt</module>
         <module>mvc</module>
         <module>rest</module>
-        <module>flex</module>
+     <module>flex</module> 
         <module>android</module>
     </modules>
 
