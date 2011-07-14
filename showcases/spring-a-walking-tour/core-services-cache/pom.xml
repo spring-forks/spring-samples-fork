@@ -2,25 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+      <parent>
         <groupId>org.springsource.examples</groupId>
         <artifactId>sawt</artifactId>
         <version>1.0-SNAPSHOT</version>
 
     </parent>
-
-	<properties>
-        <com.rabbitmq.version>2.1.0</com.rabbitmq.version>
-
-        <spring.amqp.version>1.0.0.M2</spring.amqp.version>
-        <activemq.version>5.5.0</activemq.version>
-        <spring.ws.version>2.0.1.RELEASE</spring.ws.version>
-
-        <!-- <org.springframework-version>3.0.5.RELEASE</org.springframework-version>-->
-         <org.aspectj-version>1.6.9</org.aspectj-version>
-        <org.slf4j-version>1.5.10</org.slf4j-version>
-    </properties>
-
     <artifactId>core-services-cache</artifactId>
 
     <dependencies>

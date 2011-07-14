@@ -10,6 +10,7 @@
         <module>advanced-di</module>
         <module>basic-di</module>
         <module>core-services</module>
+        <module>core-services-cache</module>
         <module>web</module>
     </modules>
 

@@ -3,7 +3,7 @@ package org.springsource.examples.sawt.services.cache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentCacheFactoryBean;
+import org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +13,8 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.sql.Driver;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,7 +30,7 @@ public class Config {
 
 	@Value("${dataSource.password}") private String password;
 
-	@Value("${dataSource.driverClassName}") private Class driverClassName;
+	@Value("${dataSource.driverClassName}") private Class<Driver> driverClassName;
 
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
@@ -51,20 +53,17 @@ public class Config {
 	}
 
 	@Bean
-	public ConcurrentCacheFactoryBean<Object, Object> customersCacheFactoryBean() {
-		ConcurrentCacheFactoryBean<Object, Object> concurrentCacheFactoryBean = new ConcurrentCacheFactoryBean<Object, Object>();
-		concurrentCacheFactoryBean.setName(CUSTOMERS_REGION);
-		concurrentCacheFactoryBean
-				.setStore(new ConcurrentHashMap<Object, Object>());
-		return concurrentCacheFactoryBean;
+	public ConcurrentMapCacheFactoryBean customersCacheFactoryBean() {
+        ConcurrentMapCacheFactoryBean concurrentMapCacheFactoryBean = new ConcurrentMapCacheFactoryBean() ;
+        concurrentMapCacheFactoryBean.setStore(new ConcurrentHashMap());
+        concurrentMapCacheFactoryBean.setName(Config.CUSTOMERS_REGION);
+        return concurrentMapCacheFactoryBean;
 	}
 
 	@Bean
 	public CacheManager cacheManager() throws Exception {
 		SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
-		Set<Cache<?, ?>> caches = new HashSet<Cache<?, ?>>();
-		caches.add(customersCacheFactoryBean().getObject());
-		simpleCacheManager.setCaches(caches);
+        simpleCacheManager.setCaches(Arrays.<Cache>asList( customersCacheFactoryBean().getObject()));
 		return simpleCacheManager;
 	}
 
