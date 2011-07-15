@@ -9,20 +9,21 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.transaction.RabbitTransactionManager;
 import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.inject.Inject;
 
 @Configuration
+@PropertySource("classpath:/services.properties")
+@EnableTransactionManagement
 public class Config {
 
-    @Value("${amqp.broker.url}")
-    private String brokerUrl;
-    @Value("${amqp.broker.username}")
-    private String username;
-    @Value("${amqp.broker.password}")
-    private String password;
+    @Inject
+    private Environment environment;
 
     private String customersQueueAndExchangeName = "customers";
 
@@ -43,11 +44,12 @@ public class Config {
         return new JsonMessageConverter();
     }
 
+
     @Bean
     public ConnectionFactory singleConnectionFactory() {
-        SingleConnectionFactory connectionFactory = new SingleConnectionFactory(this.brokerUrl);
-        connectionFactory.setUsername(this.username);
-        connectionFactory.setPassword(this.password);
+        SingleConnectionFactory connectionFactory = new SingleConnectionFactory(environment.getProperty("amqp.broker.url"));
+        connectionFactory.setUsername(environment.getProperty("amqp.broker.username"));
+        connectionFactory.setPassword(environment.getProperty("amqp.broker.password"));
         return connectionFactory;
     }
 

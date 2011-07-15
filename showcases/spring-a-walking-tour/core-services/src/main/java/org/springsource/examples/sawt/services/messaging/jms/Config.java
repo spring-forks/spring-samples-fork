@@ -4,6 +4,8 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.core.JmsTemplate;
@@ -12,22 +14,24 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 import org.springframework.oxm.castor.CastorMarshaller;
 import org.springframework.oxm.support.AbstractMarshaller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.inject.Inject;
 import javax.jms.ConnectionFactory;
 
 /**
  * configuration for a raw JMS based solution
  */
 @Configuration
+@PropertySource("classpath:/services.properties")
+@EnableTransactionManagement
 public class Config {
-
-    @Value("${jms.broker.url}")
-    private String brokerUrl;
+@Inject private Environment environment ;
 
     @Bean
     public ConnectionFactory connectionFactory() throws Exception {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-        activeMQConnectionFactory.setBrokerURL(this.brokerUrl);
+        activeMQConnectionFactory.setBrokerURL( environment.getProperty("jms.broker.url") );
         return new CachingConnectionFactory(activeMQConnectionFactory);
     }
 

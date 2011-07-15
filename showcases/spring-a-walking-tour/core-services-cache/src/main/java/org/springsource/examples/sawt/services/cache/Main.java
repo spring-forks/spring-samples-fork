@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
@@ -24,10 +25,12 @@ public class Main {
 
 	public static void main(String args[]) throws Throwable {
 
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"/org/springsource/examples/sawt/services/cache/config.xml");
-		CacheManager cacheManager = applicationContext
-				.getBean(CacheManager.class);
+         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+            "/org/springsource/examples/sawt/services/cache/config.xml");
+        applicationContext.refresh();
+
+        CacheManager cacheManager = applicationContext.getBean(CacheManager.class);
+
 		Cache c = cacheManager.getCache(Config.CUSTOMERS_REGION);
 
 		CustomerService customerService = applicationContext

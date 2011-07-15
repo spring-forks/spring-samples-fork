@@ -4,8 +4,7 @@ package org.springsource.examples.sawt.services.messaging.jms;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.xbean.spring.context.ClassPathXmlApplicationContext;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.util.Assert;
 import org.springsource.examples.sawt.services.model.Customer;
@@ -18,7 +17,10 @@ public class Main {
 
         Log log = LogFactory.getLog(Main.class);
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/org/springsource/examples/sawt/services/messaging/jms/context.xml");
+
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        applicationContext.scan(Main.class.getPackage().getName());
+        applicationContext.refresh();
 
         JmsTemplate jmsTemplate = applicationContext.getBean(JmsTemplate.class);
 

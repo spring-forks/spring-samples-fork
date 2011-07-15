@@ -2,6 +2,7 @@ package org.springsource.examples.sawt.services.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springsource.examples.sawt.CustomerService;
 import org.springsource.examples.sawt.services.model.Customer;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,15 +23,19 @@ import java.util.Map;
 @Component
 public class JdbcCustomerService implements CustomerService {
 
-    @Value("${jdbc.sql.customers.queryById}")
     private String customerByIdQuery;
-
-
-    @Value("${jdbc.sql.customers.update}")
     private String updateCustomerQuery;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Inject private Environment environment ;
+    @Inject private JdbcTemplate jdbcTemplate;
+
+    @PostConstruct
+    public void setup (){
+        this.customerByIdQuery = environment.getProperty("jdbc.sql.customers.queryById");
+        this.updateCustomerQuery = environment.getProperty("jdbc.sql.customers.update");
+    }
+
+
 
     @Transactional
     public Customer createCustomer(String fn, String ln) {
