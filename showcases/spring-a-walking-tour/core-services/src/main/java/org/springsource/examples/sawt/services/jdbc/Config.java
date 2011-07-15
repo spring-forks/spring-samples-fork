@@ -20,7 +20,6 @@ import java.sql.Driver;
 @EnableTransactionManagement
 @Configuration
 @ComponentScan(basePackageClasses = Config.class, excludeFilters = {@ComponentScan.Filter(Configuration.class)})
-
 public class Config {
 
     @Inject

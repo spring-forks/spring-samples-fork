@@ -4,8 +4,10 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
 @SuppressWarnings("unused")
+
 public class CustomerService {
 
 	private Log log = LogFactory.getLog(getClass());

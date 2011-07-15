@@ -48,8 +48,7 @@ public class AutoToStringFactoryBean extends ProxyConfig implements FactoryBean 
 				Object[] args = invocation.getArguments();
 				return invocation.getMethod().invoke(thisPtr, args);
 			} else {
-				return ToStringBuilder.reflectionToString(invocation.getThis(),
-						toStringStyle);
+				return ToStringBuilder.reflectionToString(invocation.getThis(), toStringStyle);
 			}
 		}
 	};
