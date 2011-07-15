@@ -11,16 +11,25 @@ import org.springsource.examples.sawt.web.gwt.client.service.GwtCustomerService;
 
 @SuppressWarnings("serial,unchecked")
 public class GwtCustomerServiceImpl extends RemoteServiceServlet implements GwtCustomerService {
+    private CustomerDto fromCustomer(Customer c) {
+        try {
+            CustomerDto customerDto = new CustomerDto();
+            BeanUtils.copyProperties(customerDto, c);
+            return customerDto;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private <T> T beanOfType(Class t) {
         ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        return (T)  applicationContext.getBean(t);
+        return (T) applicationContext.getBean(t);
     }
 
     public void updateCustomer(long cid, String f, String l) {
-      try {
+        try {
             CustomerService customerService = beanOfType(CustomerService.class);
-            customerService.updateCustomer(cid, f,l) ;
+            customerService.updateCustomer(cid, f, l);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -29,10 +38,17 @@ public class GwtCustomerServiceImpl extends RemoteServiceServlet implements GwtC
     public CustomerDto getCustomerById(long customerId) {
         try {
             CustomerService customerService = beanOfType(CustomerService.class);
-            Customer customer = customerService.getCustomerById(customerId);
-            CustomerDto customerDto = new CustomerDto();
-            BeanUtils.copyProperties(customerDto, customer);
-            return customerDto;
+            return fromCustomer(customerService.getCustomerById(customerId));
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+    public CustomerDto createCustomer(String f, String ln) {
+        try {
+            CustomerService customerService = beanOfType(CustomerService.class);
+            return fromCustomer(customerService.createCustomer(f, ln));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

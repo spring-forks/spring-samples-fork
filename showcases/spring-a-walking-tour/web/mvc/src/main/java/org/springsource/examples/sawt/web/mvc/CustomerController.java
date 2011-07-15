@@ -1,8 +1,5 @@
 package org.springsource.examples.sawt.web.mvc;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springsource.examples.sawt.CustomerService;
 import org.springsource.examples.sawt.services.model.Customer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class CustomerController {

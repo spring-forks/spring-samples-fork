@@ -11,5 +11,5 @@ import org.springsource.examples.sawt.web.gwt.client.entities.CustomerDto;
 public interface GwtCustomerService extends RemoteService {
     void updateCustomer(long cid, String f, String l) ;
     CustomerDto getCustomerById(long customerId);
-
+    CustomerDto createCustomer( String f, String ln) ;
 }

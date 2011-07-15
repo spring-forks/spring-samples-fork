@@ -12,7 +12,8 @@
     <import resource="classpath:/org/springsource/examples/sawt/services/jdbc/config.xml"/>
 	<mvc:annotation-driven />
 	<context:component-scan base-package="org.springsource.examples.sawt.web.mvc"/>
-	
+
+    <mvc:view-controller path="/" view-name="welcome"/>
 	
 	
     

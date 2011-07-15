@@ -6,6 +6,8 @@ public class CustomerDto implements IsSerializable {
     private long id ;
     private String firstName, lastName;
 
+    public boolean isSaved(){ return this.id > 0 ; }
+
     public String getFirstName() {
         return firstName;
     }

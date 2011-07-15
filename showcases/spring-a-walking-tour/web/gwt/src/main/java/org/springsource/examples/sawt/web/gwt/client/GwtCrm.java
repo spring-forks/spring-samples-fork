@@ -20,28 +20,19 @@ import org.springsource.examples.sawt.web.gwt.client.widgets.CustomerPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class GwtCrm implements EntryPoint {
-    //http://stackoverflow.com/questions/6030202/how-to-use-the-gwt-eventbus
     public static EventBus eventBus = GWT.create(SimpleEventBus.class);
 
     private final GwtCustomerServiceAsync crmService = GWT.create(GwtCustomerService.class);
 
     private final Messages messages = GWT.create(Messages.class);
 
-    void updateCustomer(final CustomerDto customerDto) {
-        crmService.updateCustomer(customerDto.getId(), customerDto.getFirstName(), customerDto.getLastName(), new AsyncCallback<Void>() {
-            public void onFailure(Throwable throwable) {
-            }
-
-            public void onSuccess(Void aVoid) {
-            }
-        });
-    }
 
     public void onModuleLoad() {
-        final CustomerPanel customerPanel = new CustomerPanel(eventBus, messages);
+        final CustomerPanel customerPanel = new CustomerPanel(crmService, messages);
 
         RootPanel.get("customerPanelContainer").add(customerPanel);
-        eventBus.addHandler(CustomerQueryEvent.TYPE, new CustomerQueryEventHandler() {
+        /**
+         * eventBus.addHandler(CustomerQueryEvent.TYPE, new CustomerQueryEventHandler() {
             public void onCustomerQueried(final long customerId) {
                 crmService.getCustomerById(customerId, new AsyncCallback<CustomerDto>() {
 
@@ -51,7 +42,7 @@ public class GwtCrm implements EntryPoint {
                     }
 
                     public void onSuccess(CustomerDto customerDto) {
-                        customerPanel.setCustomerDto(customerDto);
+                        customerPanel.editCustomer(customerDto);
                     }
                 });
             }
@@ -59,11 +50,19 @@ public class GwtCrm implements EntryPoint {
         eventBus.addHandler(CustomerEvent.TYPE, new CustomerEventHandler() {
             public void onCustomerUpdated(CustomerEvent cEvt) {
                 if (cEvt.getCustomerEventType().equals(CustomerEvent.CustomerEventType.UPDATED)) {
-                    updateCustomer(cEvt.getCustomerDto());
+                    CustomerDto customerDto = (cEvt.getCustomerDto());
+                    crmService.updateCustomer(customerDto.getId(), customerDto.getFirstName(), customerDto.getLastName(), new AsyncCallback<Void>() {
+                        public void onFailure(Throwable throwable) {
+                        }
+
+                        public void onSuccess(Void aVoid) {
+                        }
+                    });
                 }
             }
         });
 
+         */
 
     }
 }
