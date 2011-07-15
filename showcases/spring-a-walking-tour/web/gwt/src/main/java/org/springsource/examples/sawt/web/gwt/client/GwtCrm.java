@@ -20,49 +20,13 @@ import org.springsource.examples.sawt.web.gwt.client.widgets.CustomerPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class GwtCrm implements EntryPoint {
-    public static EventBus eventBus = GWT.create(SimpleEventBus.class);
 
     private final GwtCustomerServiceAsync crmService = GWT.create(GwtCustomerService.class);
 
     private final Messages messages = GWT.create(Messages.class);
 
-
     public void onModuleLoad() {
         final CustomerPanel customerPanel = new CustomerPanel(crmService, messages);
-
         RootPanel.get("customerPanelContainer").add(customerPanel);
-        /**
-         * eventBus.addHandler(CustomerQueryEvent.TYPE, new CustomerQueryEventHandler() {
-            public void onCustomerQueried(final long customerId) {
-                crmService.getCustomerById(customerId, new AsyncCallback<CustomerDto>() {
-
-                    public void onFailure(Throwable throwable) {
-                        Window.alert("Problem! Could not retrieve the customer " + customerId +
-                                "; the error is " + throwable.toString());
-                    }
-
-                    public void onSuccess(CustomerDto customerDto) {
-                        customerPanel.editCustomer(customerDto);
-                    }
-                });
-            }
-        });
-        eventBus.addHandler(CustomerEvent.TYPE, new CustomerEventHandler() {
-            public void onCustomerUpdated(CustomerEvent cEvt) {
-                if (cEvt.getCustomerEventType().equals(CustomerEvent.CustomerEventType.UPDATED)) {
-                    CustomerDto customerDto = (cEvt.getCustomerDto());
-                    crmService.updateCustomer(customerDto.getId(), customerDto.getFirstName(), customerDto.getLastName(), new AsyncCallback<Void>() {
-                        public void onFailure(Throwable throwable) {
-                        }
-
-                        public void onSuccess(Void aVoid) {
-                        }
-                    });
-                }
-            }
-        });
-
-         */
-
     }
 }
