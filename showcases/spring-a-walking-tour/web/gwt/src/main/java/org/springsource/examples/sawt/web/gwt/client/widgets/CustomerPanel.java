@@ -3,6 +3,7 @@ package org.springsource.examples.sawt.web.gwt.client.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -12,9 +13,6 @@ import com.google.gwt.user.client.ui.*;
 import org.springsource.examples.sawt.web.gwt.client.Messages;
 import org.springsource.examples.sawt.web.gwt.client.entities.CustomerDto;
 import org.springsource.examples.sawt.web.gwt.client.service.GwtCustomerServiceAsync;
-
-// todo publish events that require the use of the services using the GWT EventBus. See http://www.google.com/events/io/2009/sessions/GoogleWebToolkitBestPractices.html
-// todo CustomerPanel shouldn't know about the CustomerService, specifically. it should be natural to publish 'customerCreatedEvent' and 'customerUpdatedEvents' and respond to them, appropriately.
 
 public class CustomerPanel extends Composite {
 
@@ -87,6 +85,32 @@ public class CustomerPanel extends Composite {
         setEditorEnabled(false);
     }
 
+    private void showDialog(String msg) {
+
+        Window.alert(msg);
+
+        /**
+         *  DialogBox dialogBox = new DialogBox();
+
+        Label html = new Label();
+        html.setText(msg);
+
+        final Button close = new Button();
+        close.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                dialogBox.hide();
+            }
+        });
+        close.setText(messages.close());
+        FlowPanel flowPanel = new FlowPanel();
+        flowPanel.add(html);
+        flowPanel.add(close);
+        dialogBox.add(flowPanel);
+        dialogBox.center();
+        dialogBox.show();
+         */
+    }
+
     @UiHandler("cancelButton")
     public void cancelForm(ClickEvent e) {
         createCustomer();
@@ -106,7 +130,6 @@ public class CustomerPanel extends Composite {
         lastName.setText(customerDto.getLastName());
     }
 
-
     @UiHandler("updateButton")
     public void updateOrSave(ClickEvent evt) {
         customerDto.setFirstName(firstName.getText());
@@ -119,10 +142,9 @@ public class CustomerPanel extends Composite {
                 }
 
                 public void onSuccess(CustomerDto result) {
-                    Window.alert("your new client's been added!");
                     setCustomerDto(result);
                     editCustomer(result);
-
+                    showDialog("your new client's been added!");
                 }
             });
         } else {
