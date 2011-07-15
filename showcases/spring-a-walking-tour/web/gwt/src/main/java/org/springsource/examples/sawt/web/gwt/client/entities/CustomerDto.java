@@ -3,10 +3,12 @@ package org.springsource.examples.sawt.web.gwt.client.entities;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class CustomerDto implements IsSerializable {
-    private long id ;
+    private long id;
     private String firstName, lastName;
 
-    public boolean isSaved(){ return this.id > 0 ; }
+    public boolean isSaved() {
+        return this.id > 0;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -3,7 +3,6 @@ package org.springsource.examples.sawt.web.gwt.client.widgets;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -22,26 +21,17 @@ public class CustomerPanel extends Composite {
     private GwtCustomerServiceAsync gwtCustomerService;
     private Messages messages;
     private CustomerUiBinder uiBinder = GWT.create(CustomerUiBinder.class);
-
     private CustomerDto customerDto;
-    @UiField
-    Button createCustomerButton;
-    @UiField
-    TextBox firstName;
-    @UiField
-    TextBox lastName;
-    @UiField
-    Button updateButton;
-    @UiField
-    Label firstNameLabel;
-    @UiField
-    Label lastNameLabel;
-    @UiField
-    Button searchCustomerButton;
-    @UiField
-    TextBox customerId;
-    @UiField
-    Button cancelButton;
+
+    @UiField Button createCustomerButton;
+    @UiField TextBox firstName;
+    @UiField TextBox lastName;
+    @UiField Button updateButton;
+    @UiField Label firstNameLabel;
+    @UiField Label lastNameLabel;
+    @UiField Button searchCustomerButton;
+    @UiField TextBox customerId;
+    @UiField Button cancelButton;
 
     public void setCustomerDto(CustomerDto customerDto) {
         this.customerDto = customerDto;
@@ -158,5 +148,4 @@ public class CustomerPanel extends Composite {
             }
         });
     }
-
 }

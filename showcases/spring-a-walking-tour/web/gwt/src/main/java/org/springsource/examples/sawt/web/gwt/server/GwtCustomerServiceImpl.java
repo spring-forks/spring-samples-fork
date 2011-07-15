@@ -44,7 +44,6 @@ public class GwtCustomerServiceImpl extends RemoteServiceServlet implements GwtC
         }
     }
 
-
     public CustomerDto createCustomer(String f, String ln) {
         try {
             CustomerService customerService = beanOfType(CustomerService.class);
