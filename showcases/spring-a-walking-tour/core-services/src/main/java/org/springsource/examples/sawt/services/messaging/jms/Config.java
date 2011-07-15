@@ -2,6 +2,7 @@ package org.springsource.examples.sawt.services.messaging.jms;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,6 +25,8 @@ import javax.jms.ConnectionFactory;
 @Configuration
 @PropertySource("classpath:/services.properties")
 @EnableTransactionManagement
+@ComponentScan(basePackageClasses = Config.class, excludeFilters = {@ComponentScan.Filter(Configuration.class)})
+
 public class Config {
     @Inject
     private Environment environment;

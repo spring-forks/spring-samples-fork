@@ -9,9 +9,8 @@ import org.springsource.examples.sawt.services.model.Customer;
 public class Main {
     public static void main(String args[]) throws Throwable {
 
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.scan(Main.class.getPackage().getName());
-        applicationContext.refresh();
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
+
 
         Log log = LogFactory.getLog(Main.class);
 

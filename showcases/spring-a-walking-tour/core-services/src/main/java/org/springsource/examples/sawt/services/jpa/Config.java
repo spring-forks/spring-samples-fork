@@ -1,6 +1,7 @@
 package org.springsource.examples.sawt.services.jpa;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -22,6 +23,8 @@ import java.sql.Driver;
 @Configuration
 @PropertySource("classpath:/services.properties")
 @EnableTransactionManagement
+@ComponentScan(basePackageClasses = Config.class, excludeFilters = {@ComponentScan.Filter(Configuration.class)})
+
 public class Config {
 
     @Inject

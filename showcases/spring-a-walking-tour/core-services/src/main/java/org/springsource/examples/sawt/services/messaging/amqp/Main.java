@@ -15,9 +15,7 @@ public class Main {
 
         Log log = LogFactory.getLog(Main.class);
 
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.scan(Main.class.getPackage().getName());
-        applicationContext.refresh();
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
 
         AmqpTemplate amqpTemplate = applicationContext.getBean(AmqpTemplate.class);
 
