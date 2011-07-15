@@ -86,29 +86,7 @@ public class CustomerPanel extends Composite {
     }
 
     private void showDialog(String msg) {
-
         Window.alert(msg);
-
-        /**
-         *  DialogBox dialogBox = new DialogBox();
-
-        Label html = new Label();
-        html.setText(msg);
-
-        final Button close = new Button();
-        close.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                dialogBox.hide();
-            }
-        });
-        close.setText(messages.close());
-        FlowPanel flowPanel = new FlowPanel();
-        flowPanel.add(html);
-        flowPanel.add(close);
-        dialogBox.add(flowPanel);
-        dialogBox.center();
-        dialogBox.show();
-         */
     }
 
     @UiHandler("cancelButton")
@@ -120,12 +98,13 @@ public class CustomerPanel extends Composite {
     @UiHandler("createCustomerButton")
     public void setupFormForNewCustomerRecord(ClickEvent evt) {
         createCustomer();
-        updateButton.setText(messages.save());
+
         setEditorEnabled(true);
     }
 
     private void createCustomer() {
         setCustomerDto(new CustomerDto());
+        updateButton.setText(messages.save()  );
         firstName.setText(customerDto.getFirstName());
         lastName.setText(customerDto.getLastName());
     }
@@ -144,7 +123,7 @@ public class CustomerPanel extends Composite {
                 public void onSuccess(CustomerDto result) {
                     setCustomerDto(result);
                     editCustomer(result);
-                    showDialog("your new client's been added!");
+                    showDialog( messages.customerCreated());
                 }
             });
         } else {
@@ -154,8 +133,8 @@ public class CustomerPanel extends Composite {
                 }
 
                 public void onSuccess(Void aVoid) {
-                    setCustomerDto(null);
-                    setEditorEnabled(false);
+                    createCustomer();
+                    showDialog( messages.customerUpdated());
                 }
             });
         }
