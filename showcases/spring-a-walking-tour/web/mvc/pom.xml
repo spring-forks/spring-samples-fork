@@ -32,10 +32,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -44,29 +41,17 @@
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
         </dependency>
-
-
         <dependency>
-            <groupId>org.mortbay.jetty</groupId>
+            <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jstl-impl</artifactId>
-
-        </dependency>
-
     </dependencies>
-
 </project>
