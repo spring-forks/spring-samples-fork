@@ -16,7 +16,7 @@ public class NoSqlRedisCustomerService implements CustomerService {
     private String uniqueIdKey = "customerId";
 
     private long uniqueId() {
-    	 
+
         return this.redisTemplate.opsForValue().increment(uniqueIdKey, 1);
     }
 

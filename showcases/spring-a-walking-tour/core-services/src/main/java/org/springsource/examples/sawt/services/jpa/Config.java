@@ -24,7 +24,8 @@ import java.sql.Driver;
 @EnableTransactionManagement
 public class Config {
 
-    @Inject private Environment environment;
+    @Inject
+    private Environment environment;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws Exception {

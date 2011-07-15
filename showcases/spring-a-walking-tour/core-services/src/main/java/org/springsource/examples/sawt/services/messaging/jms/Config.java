@@ -1,7 +1,6 @@
 package org.springsource.examples.sawt.services.messaging.jms;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -26,12 +25,13 @@ import javax.jms.ConnectionFactory;
 @PropertySource("classpath:/services.properties")
 @EnableTransactionManagement
 public class Config {
-@Inject private Environment environment ;
+    @Inject
+    private Environment environment;
 
     @Bean
     public ConnectionFactory connectionFactory() throws Exception {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-        activeMQConnectionFactory.setBrokerURL( environment.getProperty("jms.broker.url") );
+        activeMQConnectionFactory.setBrokerURL(environment.getProperty("jms.broker.url"));
         return new CachingConnectionFactory(activeMQConnectionFactory);
     }
 

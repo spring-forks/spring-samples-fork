@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema version="1.0"       attributeFormDefault="unqualified"
+<xs:schema version="1.0" attributeFormDefault="unqualified"
            elementFormDefault="qualified"
            xmlns:crm="http://samples.springsource.org/sawt/customers/schemas"
            targetNamespace="http://samples.springsource.org/sawt/customers/schemas"

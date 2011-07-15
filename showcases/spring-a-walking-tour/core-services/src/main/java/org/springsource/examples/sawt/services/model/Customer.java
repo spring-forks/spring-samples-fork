@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@XmlRootElement(name = "customer",   namespace = Constants.NAMESPACE)
+@XmlRootElement(name = "customer", namespace = Constants.NAMESPACE)
 @Table(name = "customer")
 public class Customer implements java.io.Serializable {
 
@@ -30,7 +30,7 @@ public class Customer implements java.io.Serializable {
         this.lastName = lastName;
     }
 
-    @XmlAttribute(name = "id", required = false )
+    @XmlAttribute(name = "id", required = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)

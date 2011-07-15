@@ -1,7 +1,5 @@
 package org.springsource.examples.sawt.services.jdbc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,15 +24,16 @@ public class JdbcCustomerService implements CustomerService {
     private String customerByIdQuery;
     private String updateCustomerQuery;
 
-    @Inject private Environment environment ;
-    @Inject private JdbcTemplate jdbcTemplate;
+    @Inject
+    private Environment environment;
+    @Inject
+    private JdbcTemplate jdbcTemplate;
 
     @PostConstruct
-    public void setup (){
+    public void setup() {
         this.customerByIdQuery = environment.getProperty("jdbc.sql.customers.queryById");
         this.updateCustomerQuery = environment.getProperty("jdbc.sql.customers.update");
     }
-
 
 
     @Transactional

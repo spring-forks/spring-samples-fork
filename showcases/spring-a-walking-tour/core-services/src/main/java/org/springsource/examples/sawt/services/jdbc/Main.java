@@ -2,7 +2,6 @@ package org.springsource.examples.sawt.services.jdbc;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springsource.examples.sawt.CustomerService;
 import org.springsource.examples.sawt.services.model.Customer;

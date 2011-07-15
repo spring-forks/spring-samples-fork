@@ -1,12 +1,9 @@
 package org.springsource.examples.sawt.services.jdbc;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -22,7 +19,8 @@ import java.sql.Driver;
 @EnableTransactionManagement
 public class Config {
 
-    @Inject private Environment environment;
+    @Inject
+    private Environment environment;
 
     @Bean
     public JdbcTemplate jdbcTemplate() throws Exception {
@@ -34,13 +32,14 @@ public class Config {
         return new DataSourceTransactionManager(dataSource());
     }
 
-    @Bean @SuppressWarnings("unchecked")
+    @Bean
+    @SuppressWarnings("unchecked")
     public DataSource dataSource() throws Exception {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setPassword(environment.getProperty("dataSource.password"));
-        dataSource.setUrl( environment.getProperty("dataSource.url"));
+        dataSource.setUrl(environment.getProperty("dataSource.url"));
         dataSource.setUsername(environment.getProperty("dataSource.user"));
-        dataSource.setDriverClass( (Class<Driver>) Class.forName(environment.getProperty("dataSource.driverClass")));
+        dataSource.setDriverClass((Class<Driver>) Class.forName(environment.getProperty("dataSource.driverClass")));
         return dataSource;
     }
 

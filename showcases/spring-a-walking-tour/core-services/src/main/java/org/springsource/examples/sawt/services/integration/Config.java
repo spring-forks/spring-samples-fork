@@ -1,7 +1,5 @@
 package org.springsource.examples.sawt.services.integration;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.integration.launch.JobLaunchingMessageHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,8 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource("/org/springsource/examples/sawt/services/batch/context.xml")
 public class Config {
 
-    @Autowired private JobLauncher jobLauncher;
+    @Autowired
+    private JobLauncher jobLauncher;
 
     @Bean
     public JobLaunchingMessageHandler jobMessageHandler() throws Exception {
