@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-@Component 
+@Component
 public class CustomerService {
 
     private Log log = LogFactory.getLog(getClass());

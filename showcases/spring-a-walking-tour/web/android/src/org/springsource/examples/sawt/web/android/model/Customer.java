@@ -9,9 +9,12 @@ import org.simpleframework.xml.Attribute;
  */
 public class Customer {
 
-    @Attribute(required = false) private long id;
-    @Attribute(required = false) private String firstName;
-    @Attribute(required = false) private String lastName ;
+    @Attribute(required = false)
+    private long id;
+    @Attribute(required = false)
+    private String firstName;
+    @Attribute(required = false)
+    private String lastName;
 
     public Customer() {
     }

@@ -14,7 +14,8 @@ public class JdbcClient {
 
     private Log log = LogFactory.getLog(getClass());
 
-    @Autowired @Qualifier("ptm")
+    @Autowired
+    @Qualifier("ptm")
     private PlatformTransactionManager transactionManager;
 
     @PostConstruct

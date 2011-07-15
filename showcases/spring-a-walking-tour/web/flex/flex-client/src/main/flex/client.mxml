@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application 
- xmlns:fx="http://ns.adobe.com/mxml/2009"
- xmlns:s="library://ns.adobe.com/flex/spark"
- xmlns:mx="library://ns.adobe.com/flex/mx" 
- xmlns:local="*" minWidth="500"
- applicationComplete="initApp()" 
->
+<s:Application
+        xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:mx="library://ns.adobe.com/flex/mx"
+        xmlns:local="*" minWidth="500"
+        applicationComplete="initApp()"
+        >
 
     <fx:Script>
 		<![CDATA[
         import mx.controls.Alert;
-        import mx.core.FlexGlobals;
         import mx.rpc.events.FaultEvent;
         import mx.rpc.events.ResultEvent;
 
-        [Bindable] private var customer:Customer;
-        [Bindable] private var contextPath:String;
-        [Bindable] private var host:String;
-        [Bindable] private var serviceUrl:String;
-	 	
-	 	public function initApp():void {
-		  host  = mx.core.Application.application.parameters.host;	 	 
-	 	 contextPath  = mx.core.Application.application.parameters.contextPath;
-	 	 if(host == null) host = '127.0.0.1';
-        if(contextPath == null) contextPath ='';
-	 	 serviceUrl = 'http://'+host+':8080'+contextPath+'/crm/messagebroker/amf';
-	 	  
-         Alert.show('service url: ' + serviceUrl );
-	 	}
-		
+        [Bindable]
+        private var customer:Customer;
+        [Bindable]
+        private var contextPath:String;
+        [Bindable]
+        private var host:String;
+        [Bindable]
+        private var serviceUrl:String;
+
+        public function initApp():void {
+            host = mx.core.Application.application.parameters.host;
+            contextPath = mx.core.Application.application.parameters.contextPath;
+            if (host == null) host = '127.0.0.1';
+            if (contextPath == null) contextPath = '';
+            serviceUrl = 'http://' + host + ':8080' + contextPath + '/crm/messagebroker/amf';
+
+            Alert.show('service url: ' + serviceUrl);
+        }
+
         public function loadById():void {
             var cid:Number = parseInt(idStr.text);
-          //  Alert.show( 'cid:' + cid) ;
-            customerService.getCustomerById( cid);
+            //  Alert.show( 'cid:' + cid) ;
+            customerService.getCustomerById(cid);
         }
 
         public function openCustomer(customer:Customer):void {
-            cf.editCustomer( customer);
+            cf.editCustomer(customer);
         }
 
-        private function customerCreatedHandler ( event:CustomerEvent ):void {
-           Alert.show("customer #"+ event.customer.id + " has been created");
+        private function customerCreatedHandler(event:CustomerEvent):void {
+            Alert.show("customer #" + event.customer.id + " has been created");
         }
 
-        private function customerUpdatedHandler ( event:CustomerEvent ):void {
-           Alert.show("customer #"+ event.customer.id + " has been updated");
+        private function customerUpdatedHandler(event:CustomerEvent):void {
+            Alert.show("customer #" + event.customer.id + " has been updated");
         }
 
-        private function customerByIdHandler (event:ResultEvent):void {
-            customer = event.result as Customer ;
+        private function customerByIdHandler(event:ResultEvent):void {
+            customer = event.result as Customer;
             cf.editCustomer(customer);
         }
 
         private function faultHandler(event:FaultEvent):void {
             Alert.show(event.fault.faultDetail);
         }
-
         ]]>
 	</fx:Script>
 
@@ -73,7 +75,8 @@
     </s:controlBarContent>
 
     <mx:VBox id="tn" width="100%" height="100%">
-      <local:CustomerForm serviceUrl="{serviceUrl}" id="cf" customerUpdated="customerUpdatedHandler(event)" customerCreated="customerCreatedHandler(event)" />
+        <local:CustomerForm serviceUrl="{serviceUrl}" id="cf" customerUpdated="customerUpdatedHandler(event)"
+                            customerCreated="customerCreatedHandler(event)"/>
     </mx:VBox>
 
 

@@ -14,16 +14,16 @@
 
     <context:component-scan base-package="org.springsource.examples.sawt.web.flex"/>
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
-    <mvc:default-servlet-handler />
+    <mvc:default-servlet-handler/>
 
 
-   	<flex:message-broker mapping-order="1">
-		<flex:mapping pattern="/messagebroker/*"/>
-		<flex:message-service default-channels="my-streaming-amf,my-longpolling-amf,my-polling-amf" />
-	</flex:message-broker>
+    <flex:message-broker mapping-order="1">
+        <flex:mapping pattern="/messagebroker/*"/>
+        <flex:message-service default-channels="my-streaming-amf,my-longpolling-amf,my-polling-amf"/>
+    </flex:message-broker>
 
-    <flex:remoting-destination ref="jdbcCustomerService"  destination-id="customerService" />
+    <flex:remoting-destination ref="jdbcCustomerService" destination-id="customerService"/>
 
 </beans>

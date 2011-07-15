@@ -35,12 +35,12 @@ public class Welcome extends Activity {
         }
     };
 
-    private View.OnClickListener newCustomerBtn = new View.OnClickListener(){
+    private View.OnClickListener newCustomerBtn = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             showEditorFor(new Customer());
         }
-    } ;
+    };
 
 
     @Override

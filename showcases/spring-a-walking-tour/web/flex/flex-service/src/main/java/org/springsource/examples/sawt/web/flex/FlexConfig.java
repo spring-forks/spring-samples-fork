@@ -8,12 +8,12 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 public class FlexConfig {
 
-	@Bean
-	public InternalResourceViewResolver resolver() {
-		InternalResourceViewResolver i = new InternalResourceViewResolver();
-		i.setViewClass(JstlView.class);
-		i.setPrefix("/WEB-INF/jsp/");
-		i.setSuffix(".jsp");
-		return i;
-	}
+    @Bean
+    public InternalResourceViewResolver resolver() {
+        InternalResourceViewResolver i = new InternalResourceViewResolver();
+        i.setViewClass(JstlView.class);
+        i.setPrefix("/WEB-INF/jsp/");
+        i.setSuffix(".jsp");
+        return i;
+    }
 }

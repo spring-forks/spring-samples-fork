@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
     public static void main(String[] args) throws Throwable {
-        ApplicationContext applicationContext = 
-        	new AnnotationConfigApplicationContext(Main.class.getPackage().getName());
+        ApplicationContext applicationContext =
+                new AnnotationConfigApplicationContext(Main.class.getPackage().getName());
     }
 }

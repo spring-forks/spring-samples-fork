@@ -18,14 +18,14 @@ import java.util.Map;
 @Controller
 public class CustomerController {
 
-
     private Log log = LogFactory.getLog(getClass());
 
-    @Autowired private CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
     @ModelAttribute  // so that Spring MVC has something to bind form values to
-    public Customer customer (){
-     return new Customer() ;
+    public Customer customer() {
+        return new Customer();
     }
 
     @RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -45,11 +45,11 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddition( @ModelAttribute Customer c, Model modelAndView ) {
-        log.debug(String.format("adding %s, %s", c.getFirstName(),c.getLastName()));
-        Customer customer = this.customerService.createCustomer( c.getFirstName(),c.getLastName()) ;
+    public String processAddition(@ModelAttribute Customer c, Model modelAndView) {
+        log.debug(String.format("adding %s, %s", c.getFirstName(), c.getLastName()));
+        Customer customer = this.customerService.createCustomer(c.getFirstName(), c.getLastName());
         modelAndView.addAttribute("id", customer.getId());
-        return "redirect:/display"  ;
+        return "redirect:/display";
     }
 
 

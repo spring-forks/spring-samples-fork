@@ -23,15 +23,24 @@ public class CustomerPanel extends Composite {
     private CustomerUiBinder uiBinder = GWT.create(CustomerUiBinder.class);
     private CustomerDto customerDto;
 
-    @UiField Button createCustomerButton;
-    @UiField TextBox firstName;
-    @UiField TextBox lastName;
-    @UiField Button updateButton;
-    @UiField Label firstNameLabel;
-    @UiField Label lastNameLabel;
-    @UiField Button searchCustomerButton;
-    @UiField TextBox customerId;
-    @UiField Button cancelButton;
+    @UiField
+    Button createCustomerButton;
+    @UiField
+    TextBox firstName;
+    @UiField
+    TextBox lastName;
+    @UiField
+    Button updateButton;
+    @UiField
+    Label firstNameLabel;
+    @UiField
+    Label lastNameLabel;
+    @UiField
+    Button searchCustomerButton;
+    @UiField
+    TextBox customerId;
+    @UiField
+    Button cancelButton;
 
     public void setCustomerDto(CustomerDto customerDto) {
         this.customerDto = customerDto;
@@ -94,7 +103,7 @@ public class CustomerPanel extends Composite {
 
     private void createCustomer() {
         setCustomerDto(new CustomerDto());
-        updateButton.setText(messages.save()  );
+        updateButton.setText(messages.save());
         firstName.setText(customerDto.getFirstName());
         lastName.setText(customerDto.getLastName());
     }
@@ -113,7 +122,7 @@ public class CustomerPanel extends Composite {
                 public void onSuccess(CustomerDto result) {
                     setCustomerDto(result);
                     editCustomer(result);
-                    showDialog( messages.customerCreated());
+                    showDialog(messages.customerCreated());
                 }
             });
         } else {
@@ -124,7 +133,7 @@ public class CustomerPanel extends Composite {
 
                 public void onSuccess(Void aVoid) {
                     createCustomer();
-                    showDialog( messages.customerUpdated());
+                    showDialog(messages.customerUpdated());
                 }
             });
         }

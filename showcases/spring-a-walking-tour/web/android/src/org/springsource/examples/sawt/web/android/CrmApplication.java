@@ -26,13 +26,14 @@ public class CrmApplication {
         this.customer = customer;
     }
 
-    private CustomerService customerService ;
+    private CustomerService customerService;
+
     public CrmApplication(String url) {
-        this.customerService = new CustomerServiceClient( url );
+        this.customerService = new CustomerServiceClient(url);
     }
 
-    public static CrmApplication crmApplicationInstance(Context context){
-        instance.compareAndSet(null , new CrmApplication( context.getString(R.string.base_uri)));
+    public static CrmApplication crmApplicationInstance(Context context) {
+        instance.compareAndSet(null, new CrmApplication(context.getString(R.string.base_uri)));
         return instance.get();
     }
 

@@ -1,22 +1,21 @@
 package org.springsource.examples.sawt.xml;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @SuppressWarnings("unused")
 
 public class CustomerService {
 
-	private Log log = LogFactory.getLog(getClass());
+    private Log log = LogFactory.getLog(getClass());
 
-	private DataSource dataSource;
+    private DataSource dataSource;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		log.info("setting dataSource" + dataSource.toString());
-	}
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+        log.info("setting dataSource" + dataSource.toString());
+    }
 
 }

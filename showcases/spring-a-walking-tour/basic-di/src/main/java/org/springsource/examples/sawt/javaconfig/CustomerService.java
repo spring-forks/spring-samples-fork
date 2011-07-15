@@ -1,23 +1,23 @@
 package org.springsource.examples.sawt.javaconfig;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
 public class CustomerService {
 
-	private Log log = LogFactory.getLog(getClass());
+    private Log log = LogFactory.getLog(getClass());
 
-	public void setDataSource(DataSource ds) {
-		this.dataSource = ds;
-	}
+    public void setDataSource(DataSource ds) {
+        this.dataSource = ds;
+    }
 
-	private DataSource dataSource;
+    private DataSource dataSource;
 
-	@PostConstruct
-	public void start() throws Exception {
-		log.info("CustomerService#dataSource : " + dataSource.toString());
-	}
+    @PostConstruct
+    public void start() throws Exception {
+        log.info("CustomerService#dataSource : " + dataSource.toString());
+    }
 }

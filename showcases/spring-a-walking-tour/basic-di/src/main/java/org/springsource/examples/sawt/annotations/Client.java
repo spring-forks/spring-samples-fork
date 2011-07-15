@@ -9,26 +9,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class Client implements InitializingBean {
 
-	private Log log = LogFactory.getLog(getClass());
+    private Log log = LogFactory.getLog(getClass());
 
-	//@Autowired
-	public Client(CustomerService customerService) {
-		this.customerService = customerService;
-	}
+    //@Autowired
+    public Client(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
-	@Autowired
-	private CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-	// @Autowired
-	public void setCustomerService(CustomerService cs) {
-		this.customerService = cs;
-	}
+    // @Autowired
+    public void setCustomerService(CustomerService cs) {
+        this.customerService = cs;
+    }
 
-    public Client(){ }
+    public Client() {
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		log.info("Starting Client. CustomerService implementation is "
-				+ this.customerService.getClass());
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        log.info("Starting Client. CustomerService implementation is "
+                + this.customerService.getClass());
+    }
 }

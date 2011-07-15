@@ -15,56 +15,58 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 import java.sql.Driver;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class Config {
 
-	public static final String CUSTOMERS_REGION = "customers";
+    public static final String CUSTOMERS_REGION = "customers";
 
-	@Value("${dataSource.url}") private String url;
+    @Value("${dataSource.url}")
+    private String url;
 
-	@Value("${dataSource.user}") private String user;
+    @Value("${dataSource.user}")
+    private String user;
 
-	@Value("${dataSource.password}") private String password;
+    @Value("${dataSource.password}")
+    private String password;
 
-	@Value("${dataSource.driverClassName}") private Class<Driver> driverClassName;
+    @Value("${dataSource.driverClassName}")
+    private Class<Driver> driverClassName;
 
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(this.dataSource());
-	}
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(this.dataSource());
+    }
 
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new DataSourceTransactionManager(dataSource());
-	}
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
 
-	@Bean
-	public DataSource dataSource() {
-		SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
-		simpleDriverDataSource.setPassword(this.password);
-		simpleDriverDataSource.setUrl(this.url);
-		simpleDriverDataSource.setUsername(this.user);
-		simpleDriverDataSource.setDriverClass(driverClassName);
-		return simpleDriverDataSource;
-	}
+    @Bean
+    public DataSource dataSource() {
+        SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
+        simpleDriverDataSource.setPassword(this.password);
+        simpleDriverDataSource.setUrl(this.url);
+        simpleDriverDataSource.setUsername(this.user);
+        simpleDriverDataSource.setDriverClass(driverClassName);
+        return simpleDriverDataSource;
+    }
 
-	@Bean
-	public ConcurrentMapCacheFactoryBean customersCacheFactoryBean() {
-        ConcurrentMapCacheFactoryBean concurrentMapCacheFactoryBean = new ConcurrentMapCacheFactoryBean() ;
+    @Bean
+    public ConcurrentMapCacheFactoryBean customersCacheFactoryBean() {
+        ConcurrentMapCacheFactoryBean concurrentMapCacheFactoryBean = new ConcurrentMapCacheFactoryBean();
         concurrentMapCacheFactoryBean.setStore(new ConcurrentHashMap());
         concurrentMapCacheFactoryBean.setName(Config.CUSTOMERS_REGION);
         return concurrentMapCacheFactoryBean;
-	}
+    }
 
-	@Bean
-	public CacheManager cacheManager() throws Exception {
-		SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
-        simpleCacheManager.setCaches(Arrays.<Cache>asList( customersCacheFactoryBean().getObject()));
-		return simpleCacheManager;
-	}
+    @Bean
+    public CacheManager cacheManager() throws Exception {
+        SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
+        simpleCacheManager.setCaches(Arrays.<Cache>asList(customersCacheFactoryBean().getObject()));
+        return simpleCacheManager;
+    }
 
 }

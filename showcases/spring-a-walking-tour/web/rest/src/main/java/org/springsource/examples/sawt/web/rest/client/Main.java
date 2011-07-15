@@ -17,19 +17,19 @@ public class Main {
         RestTemplate restTemplate = applicationContext.getBean(RestTemplate.class);
 
 
-        String url = "http://127.0.0.1:8080/" ; // root
+        String url = "http://127.0.0.1:8080/"; // root
 
 
         Customer c = new Customer("New", "Customer" + System.currentTimeMillis());
 
-        c = restTemplate.postForEntity ( url + "customers" , c , Customer.class).getBody();
-        log.info("created customer "+c.toString());
+        c = restTemplate.postForEntity(url + "customers", c, Customer.class).getBody();
+        log.info("created customer " + c.toString());
 
-        Customer customer1 = restTemplate.getForEntity( url + "customer/{customerId}", Customer.class,  c.getId()).getBody();
-        log.info("fetched customer "+ customer1.toString());
+        Customer customer1 = restTemplate.getForEntity(url + "customer/{customerId}", Customer.class, c.getId()).getBody();
+        log.info("fetched customer " + customer1.toString());
 
-        c.setFirstName(c.getFirstName() +"Updated");
-        c = restTemplate.postForEntity( url + "customer/{customerId}", c, Customer.class, c.getId()).getBody();
+        c.setFirstName(c.getFirstName() + "Updated");
+        c = restTemplate.postForEntity(url + "customer/{customerId}", c, Customer.class, c.getId()).getBody();
         log.info("updated the customer:  " + c.toString());
 
     }

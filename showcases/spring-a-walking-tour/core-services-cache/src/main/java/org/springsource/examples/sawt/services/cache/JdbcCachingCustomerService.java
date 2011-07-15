@@ -23,66 +23,66 @@ import static org.springsource.examples.sawt.services.cache.Config.CUSTOMERS_REG
 @Component
 public class JdbcCachingCustomerService implements CustomerService {
 
-	private Log log = LogFactory.getLog(getClass());
+    private Log log = LogFactory.getLog(getClass());
 
-	@Value("${jdbc.sql.customers.queryById}")
-	private String customerByIdQuery;
+    @Value("${jdbc.sql.customers.queryById}")
+    private String customerByIdQuery;
 
-	@Value("${jdbc.sql.customers.update}")
-	private String updateCustomerQuery;
+    @Value("${jdbc.sql.customers.update}")
+    private String updateCustomerQuery;
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@Transactional
-	public Customer createCustomer(String fn, String ln) {
+    @Transactional
+    public Customer createCustomer(String fn, String ln) {
 
-		Map<String, Object> args = new HashMap<String, Object>();
-		args.put("first_name", fn);
-		args.put("last_name", ln);
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("first_name", fn);
+        args.put("last_name", ln);
 
-		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-		simpleJdbcInsert.setTableName("customer");
-		simpleJdbcInsert.setColumnNames(new ArrayList<String>(args.keySet()));
-		simpleJdbcInsert.setGeneratedKeyName("id");
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        simpleJdbcInsert.setTableName("customer");
+        simpleJdbcInsert.setColumnNames(new ArrayList<String>(args.keySet()));
+        simpleJdbcInsert.setGeneratedKeyName("id");
 
-		Number id = simpleJdbcInsert.executeAndReturnKey(args); // the ID of the
-																// inserted
-																// record.
-		Customer c = getCustomerById(id.longValue());
-		log.info("createCustomer:" + c.toString());
-		return c;
-	}
+        Number id = simpleJdbcInsert.executeAndReturnKey(args); // the ID of the
+        // inserted
+        // record.
+        Customer c = getCustomerById(id.longValue());
+        log.info("createCustomer:" + c.toString());
+        return c;
+    }
 
-	// DefaultKeyGenerator generates the map based on the hashCode of the
-	// params, by default. Here, we're telling it to use parameter 0 (the ID)
-	@Cacheable(value = CUSTOMERS_REGION, key = "#p0")
-	@Transactional(readOnly = true)
-	public Customer getCustomerById(long id) {
-		Customer c = jdbcTemplate.queryForObject(customerByIdQuery,
-				customerRowMapper, id);
-		log.info("getCustomerById:" + c.toString());
-		return c;
-	}
+    // DefaultKeyGenerator generates the map based on the hashCode of the
+    // params, by default. Here, we're telling it to use parameter 0 (the ID)
+    @Cacheable(value = CUSTOMERS_REGION, key = "#p0")
+    @Transactional(readOnly = true)
+    public Customer getCustomerById(long id) {
+        Customer c = jdbcTemplate.queryForObject(customerByIdQuery,
+                customerRowMapper, id);
+        log.info("getCustomerById:" + c.toString());
+        return c;
+    }
 
-	// DefaultKeyGenerator generates the map based on the hashCode of the
-	// params, by default. Here, we're telling it to use parameter 0 (the ID)
-	@CacheEvict(value = CUSTOMERS_REGION, key = "#p0")
-	@Transactional
-	public Customer updateCustomer(long id, String fn, String ln) {
-		this.jdbcTemplate.update(updateCustomerQuery, fn, ln, id);
-		Customer c = getCustomerById(id);
-		log.info("updateCustomer:" + c.toString());
-		return c;
-	}
+    // DefaultKeyGenerator generates the map based on the hashCode of the
+    // params, by default. Here, we're telling it to use parameter 0 (the ID)
+    @CacheEvict(value = CUSTOMERS_REGION, key = "#p0")
+    @Transactional
+    public Customer updateCustomer(long id, String fn, String ln) {
+        this.jdbcTemplate.update(updateCustomerQuery, fn, ln, id);
+        Customer c = getCustomerById(id);
+        log.info("updateCustomer:" + c.toString());
+        return c;
+    }
 
-	private RowMapper<Customer> customerRowMapper = new RowMapper<Customer>() {
+    private RowMapper<Customer> customerRowMapper = new RowMapper<Customer>() {
 
-		public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
-			long id = resultSet.getInt("id");
-			String firstName = resultSet.getString("first_name");
-			String lastName = resultSet.getString("last_name");
-			return new Customer(id, firstName, lastName);
-		}
-	};
+        public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+            long id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            return new Customer(id, firstName, lastName);
+        }
+    };
 }

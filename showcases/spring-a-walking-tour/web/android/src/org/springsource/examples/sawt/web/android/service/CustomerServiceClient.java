@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springsource.examples.sawt.web.android.model.Customer;
 
-public class CustomerServiceClient  implements CustomerService {
+public class CustomerServiceClient implements CustomerService {
 
     private String baseServiceUrl;
     private RestTemplate restTemplate = new RestTemplate();
@@ -42,7 +42,7 @@ public class CustomerServiceClient  implements CustomerService {
     @Override
     public Customer updateCustomer(long id, String fn, String ln) {
         return extractResponse(
-        this.restTemplate.postForEntity(urlForPath("customer/{customerId}"), new Customer(id, fn, ln), Customer.class, id));
+                this.restTemplate.postForEntity(urlForPath("customer/{customerId}"), new Customer(id, fn, ln), Customer.class, id));
     }
 
     @Override
