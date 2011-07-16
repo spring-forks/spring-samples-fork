@@ -11,9 +11,11 @@ public class Customer {
 
     @Attribute(required = false)
     private long id;
-    @Attribute(required = false)
+    
+    @Attribute(required = false,name = "first-name")
     private String firstName;
-    @Attribute(required = false)
+    
+    @Attribute(required = false,name = "last-name")
     private String lastName;
 
     public Customer() {

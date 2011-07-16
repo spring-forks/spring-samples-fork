@@ -151,12 +151,7 @@
 			<artifactId>spring-android-rest-template</artifactId>
 			<version>${spring-android-version}</version>
 		</dependency>
-		<dependency>
-			<!-- Using Jackson for JSON marshaling -->
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson-version}</version>
-		</dependency>
+	 
 		<dependency>
 			<!-- Using Simple for XML marshaling -->
 			<groupId>org.simpleframework</groupId>

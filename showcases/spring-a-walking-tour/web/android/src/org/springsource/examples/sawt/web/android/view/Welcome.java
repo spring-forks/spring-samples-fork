@@ -11,6 +11,7 @@ import org.springsource.examples.sawt.web.android.CrmApplication;
 import org.springsource.examples.sawt.web.android.R;
 import org.springsource.examples.sawt.web.android.Utils;
 import org.springsource.examples.sawt.web.android.model.Customer;
+import org.springsource.examples.sawt.web.android.service.CustomerService;
 
 public class Welcome extends Activity {
 
@@ -53,9 +54,13 @@ public class Welcome extends Activity {
 
         customerIdText = (EditText) findViewById(R.id.cid);
         editBtn = (Button) findViewById(R.id.customer_load_button);
-        editBtn.setOnClickListener(editCustomerBtn);
-        Customer c = CrmApplication.crmApplicationInstance(Welcome.this).getCustomerService().getCustomerById(71L);
+        editBtn.setOnClickListener(editCustomerBtn); 
         
+        CrmApplication application = CrmApplication.crmApplicationInstance( this) ;
+        
+        CustomerService cs = application.getCustomerService(); 
+        Customer c =  cs.getCustomerById(71L);
+        showEditorFor(c);
 
     }
 }
