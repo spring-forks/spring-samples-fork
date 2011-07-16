@@ -1,18 +1,19 @@
 package org.springsource.examples.sawt.web.android.view;
 
+import org.springframework.util.StringUtils;
+import org.springsource.examples.sawt.web.android.CrmApplication;
+import org.springsource.examples.sawt.web.android.Utils;
+import org.springsource.examples.sawt.web.android.model.Customer;
+import org.springsource.examples.sawt.web.android.service.CustomerService;
+import org.springsource.examples.sawt.web.android.service.CustomerServiceClient;
+
+import android.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import org.springframework.util.StringUtils;
-import org.springsource.examples.sawt.web.android.CrmApplication;
-import org.springsource.examples.sawt.web.android.R;
-import org.springsource.examples.sawt.web.android.Utils;
-import org.springsource.examples.sawt.web.android.model.Customer;
-import org.springsource.examples.sawt.web.android.service.CustomerService;
-import org.springsource.examples.sawt.web.android.service.CustomerServiceClient;
 
 /**
  * Android UI designed to support editing a single {@link org.springsource.examples.sawt.web.android.model.Customer} entity.
