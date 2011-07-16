@@ -54,7 +54,8 @@ public class Welcome extends Activity {
         customerIdText = (EditText) findViewById(R.id.cid);
         editBtn = (Button) findViewById(R.id.customer_load_button);
         editBtn.setOnClickListener(editCustomerBtn);
-
+        Customer c = CrmApplication.crmApplicationInstance(Welcome.this).getCustomerService().getCustomerById(71L);
+        
 
     }
 }

@@ -6,8 +6,8 @@ import org.springsource.examples.sawt.web.android.Utils;
 import org.springsource.examples.sawt.web.android.model.Customer;
 import org.springsource.examples.sawt.web.android.service.CustomerService;
 import org.springsource.examples.sawt.web.android.service.CustomerServiceClient;
+import org.springsource.examples.sawt.web.android.R;
 
-import android.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
