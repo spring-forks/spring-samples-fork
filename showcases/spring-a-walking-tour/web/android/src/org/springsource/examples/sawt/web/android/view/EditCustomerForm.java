@@ -1,24 +1,23 @@
 package org.springsource.examples.sawt.web.android.view;
 
-import org.springframework.util.StringUtils;
-import org.springsource.examples.sawt.web.android.CrmApplication;
-import org.springsource.examples.sawt.web.android.Utils;
-import org.springsource.examples.sawt.web.android.model.Customer;
-import org.springsource.examples.sawt.web.android.service.CustomerService;
-import org.springsource.examples.sawt.web.android.service.CustomerServiceClient;
-import org.springsource.examples.sawt.web.android.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import org.springframework.util.StringUtils;
+import org.springsource.examples.sawt.web.android.CrmApplication;
+import org.springsource.examples.sawt.web.android.R;
+import org.springsource.examples.sawt.web.android.Utils;
+import org.springsource.examples.sawt.web.android.model.Customer;
+import org.springsource.examples.sawt.web.android.service.CustomerService;
+import org.springsource.examples.sawt.web.android.service.CustomerServiceClient;
 
 /**
  * Android UI designed to support editing a single {@link org.springsource.examples.sawt.web.android.model.Customer} entity.
  */
-public class EditCustomerForm extends Activity {
+public class EditCustomerForm extends Activity implements View.OnClickListener {
 
     private CustomerService customerService;
     private Button saveCustomer;
@@ -27,12 +26,11 @@ public class EditCustomerForm extends Activity {
     private EditText firstNameTextField, lastNameTextField;
     private Customer customer;
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            syncCustomerEdits();
-        }
-    };
+
+    public void onClick(View view) {
+        syncCustomerEdits();
+    }
+
 
     private void setCustomer(Customer c) {
         this.customerId.setText((c.getId() > 0) ? "#" + c.getId() + "" : getString(R.string.new_customer));
@@ -51,7 +49,8 @@ public class EditCustomerForm extends Activity {
                 this.customerService.updateCustomer(this.customer.getId(), customer.getFirstName(), customer.getLastName());
             else {
                 CrmApplication crmApplication = CrmApplication.crmApplicationInstance(this);
-                crmApplication.setCustomer(this.customerService.createCustomer(this.customer.getFirstName(), this.customer.getLastName()));
+                Customer customer = this.customerService.createCustomer(this.customer.getFirstName(), this.customer.getLastName());
+                crmApplication.setCustomer(customer);
                 setCustomer(crmApplication.getCustomer());
             }
         }
@@ -79,7 +78,7 @@ public class EditCustomerForm extends Activity {
         lastNameTextField = (EditText) this.findViewById(R.id.edit_last_name);
 
         saveCustomer = (Button) this.findViewById(R.id.save_customer);
-        saveCustomer.setOnClickListener(onClickListener);
+        saveCustomer.setOnClickListener(this);
 
     }
 

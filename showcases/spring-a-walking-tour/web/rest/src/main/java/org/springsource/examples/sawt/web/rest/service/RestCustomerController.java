@@ -29,8 +29,7 @@ public class RestCustomerController {
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     @ResponseBody
     public Customer addCustomer(@RequestBody Customer customer) {
-        return this.customerService.createCustomer(customer.getFirstName(),
-                customer.getLastName());
+        return this.customerService.createCustomer(customer.getFirstName(), customer.getLastName());
     }
 
 }

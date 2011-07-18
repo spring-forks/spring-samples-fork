@@ -28,9 +28,9 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Customer(String lastName, String firstName) {
-        this.lastName = lastName;
-        this.firstName = firstName;
+    public Customer(String f, String l) {
+        this.lastName = l;
+        this.firstName = f;
     }
 
     public long getId() {
