@@ -30,7 +30,7 @@
         <!--<org.springframework-version>3.1.0.M1</org.springframework-version>-->
         <org.springframework.security-version>3.0.3.RELEASE</org.springframework.security-version>
         <org.aspectj-version>1.6.9</org.aspectj-version>
-        <org.slf4j-version>1.5.10</org.slf4j-version>
+        <org.slf4j-version>1.6.1</org.slf4j-version>
     </properties>
 
 
@@ -39,17 +39,7 @@
 
         <dependencies>
 
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.6.1</version>
-            </dependency>
 
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.6.1</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.rabbitmq</groupId>
@@ -165,7 +155,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.7</version>
+            </dependency>
             <dependency>
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
@@ -497,39 +491,28 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.13</version>
-            </dependency>
-
-            <!--
-
-                        <dependency>
-                            <groupId>javax.validation</groupId>
-                            <artifactId>validation-api</artifactId>
-                            <version>1.0.0.GA</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.hibernate</groupId>
-                            <artifactId>hibernate-validator</artifactId>
-                            <version>4.0.2.GA</version>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>junit</groupId>
-                            <artifactId>junit</artifactId>
-                            <version>4.8.2</version>
-                            <scope>test</scope>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-test</artifactId>
-                            <version>${org.springframework-version}</version>
-                            <scope>test</scope>
-                        </dependency>
-            -->
-
+ <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+			<scope>runtime</scope>
+		</dependency>
 
         </dependencies>
 
