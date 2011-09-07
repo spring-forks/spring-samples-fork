@@ -39,7 +39,7 @@ public class JdbcTemplateCustomerRepository implements CustomerRepository, Initi
     args.put("first_name", customer.getFirstName());
     args.put("last_name", customer.getLastName());
 
-    Number id = simpleJdbcInsert.execute(args);
+    Number id = simpleJdbcInsert.executeAndReturnKey(args);
     return getCustomerById(id.longValue());
   }
 
