@@ -28,10 +28,17 @@ public class Client {
 
 	@PostConstruct
 	public void start() throws Throwable {
-		System.out.println( "android store by name: " + ToStringBuilder.reflectionToString( this.androidBookshopByName ));
-		System.out.println( "ios store by name: " + ToStringBuilder.reflectionToString( this.iosBookshopByName));
-		
-		System.out.println("android store by qualifier annotation: " + ToStringBuilder.reflectionToString(this.androidByQualifierAnnotation));	
-		System.out.println("ios store by qualifier annotation: " + ToStringBuilder.reflectionToString(this.iosByQualifierAnnotation));
+		System.out.println("android store by name: "
+				+ ToStringBuilder
+						.reflectionToString(this.androidBookshopByName));
+		System.out.println("ios store by name: "
+				+ ToStringBuilder.reflectionToString(this.iosBookshopByName));
+
+		System.out.println("android store by qualifier annotation: "
+				+ ToStringBuilder
+						.reflectionToString(this.androidByQualifierAnnotation));
+		System.out.println("ios store by qualifier annotation: "
+				+ ToStringBuilder
+						.reflectionToString(this.iosByQualifierAnnotation));
 	}
 }

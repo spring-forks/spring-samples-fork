@@ -7,18 +7,18 @@ import org.springsource.sawt.ioc.manybeans.Dog;
 
 @Configuration
 public class AnimalFarmConfig {
-    @Bean
-    public Dog dog() {
-        return new Dog();
-    }
+	@Bean
+	public Dog dog() {
+		return new Dog();
+	}
 
-    @Bean
-    public Cat cat() {
-        return new Cat();
-    }
+	@Bean
+	public Cat cat() {
+		return new Cat();
+	}
 
-    @Bean
-    public MethodTimeLoggingBeanPostProcessor mtPP() {
-        return new MethodTimeLoggingBeanPostProcessor();
-    }
+	@Bean
+	public MethodTimeLoggingBeanPostProcessor mtPP() {
+		return new MethodTimeLoggingBeanPostProcessor();
+	}
 }

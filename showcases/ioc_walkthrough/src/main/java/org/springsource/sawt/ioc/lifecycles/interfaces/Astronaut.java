@@ -12,22 +12,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class Astronaut implements InitializingBean, DisposableBean {
 
-    private Log log = LogFactory.getLog(getClass());
+	private Log log = LogFactory.getLog(getClass());
 
-    @Override
-    public void destroy() throws Exception {
-        log.debug("this is one small step for man... one giant leap for mankind");
-    }
+	@Override
+	public void destroy() throws Exception {
+		log.debug("this is one small step for man... one giant leap for mankind");
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        for (int i = 5; i > 0; i--) {
-            log.debug(i + "...");
-            Thread.sleep(1000);
-        }
-        log.debug("we have liftoff!");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		for (int i = 5; i > 0; i--) {
+			log.debug(i + "...");
+			Thread.sleep(1000);
+		}
+		log.debug("we have liftoff!");
+	}
 
 }
-
-

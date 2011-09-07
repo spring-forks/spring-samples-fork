@@ -9,17 +9,17 @@ import javax.sql.DataSource;
  */
 public class CustomerService {
 
-    private DataSource dataSource;
+	private DataSource dataSource;
 
-    public void setDataSource(DataSource ds) {
-        this.dataSource = ds;
-        System.out.println( "the data source has been set " + ToStringBuilder.reflectionToString(this.dataSource));
+	public void setDataSource(DataSource ds) {
+		this.dataSource = ds;
+		System.out.println("the data source has been set "
+				+ ToStringBuilder.reflectionToString(this.dataSource));
 
-    }
+	}
 
-
-    // ....
-    // ....
-    //
+	// ....
+	// ....
+	//
 
 }

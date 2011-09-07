@@ -13,7 +13,8 @@ import org.springframework.util.Assert;
 import org.springsource.sawt.ioc.manybeans.aop.MethodTimeLoggingAspect;
 
 /**
- * This simply ensures that all the required beans are defined in your application context.
+ * This simply ensures that all the required beans are defined in your
+ * application context.
  * <p/>
  * Installs:
  * <OL>
@@ -23,26 +24,36 @@ import org.springsource.sawt.ioc.manybeans.aop.MethodTimeLoggingAspect;
  */
 public class SoxComplianceSuite implements BeanFactoryPostProcessor {
 
-    private Log log = LogFactory.getLog(getClass());
+	private Log log = LogFactory.getLog(getClass());
 
-    // often a very useful question to ask: has this bean been registered before?
-    private boolean definitionExists(Class<?> clzz, ConfigurableListableBeanFactory r) {
-        boolean exists = r.getBeansOfType(clzz).size() != 0;
-        if (log.isDebugEnabled())
-            log.debug(clzz.getSimpleName() + " is" + (exists ? " " : " not ") + "already registered");
-        return exists;
-    }
+	// often a very useful question to ask: has this bean been registered
+	// before?
+	private boolean definitionExists(Class<?> clzz,
+			ConfigurableListableBeanFactory r) {
+		boolean exists = r.getBeansOfType(clzz).size() != 0;
+		if (log.isDebugEnabled())
+			log.debug(clzz.getSimpleName() + " is" + (exists ? " " : " not ")
+					+ "already registered");
+		return exists;
+	}
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+	@Override
+	public void postProcessBeanFactory(
+			ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
-        Assert.isInstanceOf(BeanDefinitionRegistry.class, beanFactory);
-        BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+		Assert.isInstanceOf(BeanDefinitionRegistry.class, beanFactory);
+		BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
 
-        if (!definitionExists(AnnotationAwareAspectJAutoProxyCreator.class, beanFactory))
-            BeanDefinitionReaderUtils.registerWithGeneratedName(new RootBeanDefinition(AnnotationAwareAspectJAutoProxyCreator.class), registry);
+		if (!definitionExists(AnnotationAwareAspectJAutoProxyCreator.class,
+				beanFactory))
+			BeanDefinitionReaderUtils.registerWithGeneratedName(
+					new RootBeanDefinition(
+							AnnotationAwareAspectJAutoProxyCreator.class),
+					registry);
 
-        if (!definitionExists(MethodTimeLoggingAspect.class, beanFactory))
-            BeanDefinitionReaderUtils.registerWithGeneratedName(new RootBeanDefinition(MethodTimeLoggingAspect.class), registry);
-    }
+		if (!definitionExists(MethodTimeLoggingAspect.class, beanFactory))
+			BeanDefinitionReaderUtils.registerWithGeneratedName(
+					new RootBeanDefinition(MethodTimeLoggingAspect.class),
+					registry);
+	}
 }

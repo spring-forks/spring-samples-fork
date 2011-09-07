@@ -8,25 +8,25 @@ import org.springsource.sawt.ioc.manybeans.Dog;
 
 @Configuration
 public class AnimalFarmConfig {
-    @Bean
-    public Dog dog() {
-        return new Dog();
-    }
+	@Bean
+	public Dog dog() {
+		return new Dog();
+	}
 
-    @Bean
-    public Cat cat() {
-        return new Cat();
-    }
+	@Bean
+	public Cat cat() {
+		return new Cat();
+	}
 
-    // once per context no matter how many AOP aspects  you create
-    // equivalent to aop:aspectj-autoproxy
-    @Bean
-    public AnnotationAwareAspectJAutoProxyCreator aop() {
-        return new AnnotationAwareAspectJAutoProxyCreator();
-    }
+	// once per context no matter how many AOP aspects you create
+	// equivalent to aop:aspectj-autoproxy
+	@Bean
+	public AnnotationAwareAspectJAutoProxyCreator aop() {
+		return new AnnotationAwareAspectJAutoProxyCreator();
+	}
 
-  @Bean
-    public MethodTimeLoggingAspect aspect() {
-        return new MethodTimeLoggingAspect();
-    }
+	@Bean
+	public MethodTimeLoggingAspect aspect() {
+		return new MethodTimeLoggingAspect();
+	}
 }

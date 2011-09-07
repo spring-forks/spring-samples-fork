@@ -17,19 +17,19 @@ import javax.sql.DataSource;
 @PropertySource("classpath:/config.properties")
 public class Config {
 
-    @Autowired
-    private Environment environment;
+	@Autowired
+	private Environment environment;
 
-    @Bean
-    public DataSource dataSource() {
-        Driver d = new Driver();
-        return new SimpleDriverDataSource(d, environment.getProperty("ds.url"));
-    }
+	@Bean
+	public DataSource dataSource() {
+		Driver d = new Driver();
+		return new SimpleDriverDataSource(d, environment.getProperty("ds.url"));
+	}
 
-    @Bean
-    public CustomerService customerService() {
-        CustomerService cs = new CustomerService();
-        cs.setDataSource(dataSource());
-        return cs;
-    }
+	@Bean
+	public CustomerService customerService() {
+		CustomerService cs = new CustomerService();
+		cs.setDataSource(dataSource());
+		return cs;
+	}
 }

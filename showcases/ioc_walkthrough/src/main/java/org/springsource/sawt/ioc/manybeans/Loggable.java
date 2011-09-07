@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marker annotation to tell the {@link org.springsource.sawt.ioc.manybeans.bpp.MethodTimeLoggingBeanPostProcessor}
+ * Marker annotation to tell the
+ * {@link org.springsource.sawt.ioc.manybeans.bpp.MethodTimeLoggingBeanPostProcessor}
  * that methods should be logged
  */
 @Retention(RetentionPolicy.RUNTIME)

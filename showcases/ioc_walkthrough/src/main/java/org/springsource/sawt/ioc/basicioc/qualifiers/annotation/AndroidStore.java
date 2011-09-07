@@ -7,7 +7,8 @@ import java.lang.annotation.Target;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
-@Target({ElementType.FIELD, ElementType.METHOD,  ElementType.TYPE, ElementType.PARAMETER})
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE,
+		ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface AndroidStore {

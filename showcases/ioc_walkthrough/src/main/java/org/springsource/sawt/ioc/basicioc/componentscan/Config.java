@@ -10,17 +10,16 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-
 @Configuration
 @PropertySource("classpath:/config.properties")
 public class Config {
 
-    @Inject
-    private Environment environment;
+	@Inject
+	private Environment environment;
 
-    @Bean
-    public DataSource dataSource() {
-        Driver d = new Driver();
-        return new SimpleDriverDataSource(d, environment.getProperty("ds.url"));
-    }
+	@Bean
+	public DataSource dataSource() {
+		Driver d = new Driver();
+		return new SimpleDriverDataSource(d, environment.getProperty("ds.url"));
+	}
 }

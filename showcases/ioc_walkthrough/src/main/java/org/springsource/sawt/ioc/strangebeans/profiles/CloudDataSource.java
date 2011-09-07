@@ -11,14 +11,15 @@ import javax.sql.DataSource;
 @Configuration
 @Profile("cloud")
 public class CloudDataSource implements DataSourceProvider, InitializingBean {
-    @Override
-    public DataSource dataSource() {
-        Driver d = new Driver();
-        return new SimpleDriverDataSource(d, "jdbc:h2:tcp://localhost/~/cloud_crm");
-    }
+	@Override
+	public DataSource dataSource() {
+		Driver d = new Driver();
+		return new SimpleDriverDataSource(d,
+				"jdbc:h2:tcp://localhost/~/cloud_crm");
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("starting " + getClass().getName());
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("starting " + getClass().getName());
+	}
 }

@@ -15,19 +15,19 @@ import javax.sql.DataSource;
 @Service
 public class CustomerService {
 
-    @Autowired
-    private DataSource dataSource1;
+	@Autowired
+	private DataSource dataSource1;
 
-    @Inject
-    private DataSource dataSource2;
+	@Inject
+	private DataSource dataSource2;
 
-    @Resource
-    private DataSource dataSource3;
+	@Resource
+	private DataSource dataSource3;
 
-    @PostConstruct
-    public void analyse() throws Throwable {
-        System.out.println(ToStringBuilder.reflectionToString(dataSource1));
-        System.out.println(ToStringBuilder.reflectionToString(dataSource2));
-        System.out.println(ToStringBuilder.reflectionToString(dataSource3));
-    }
+	@PostConstruct
+	public void analyse() throws Throwable {
+		System.out.println(ToStringBuilder.reflectionToString(dataSource1));
+		System.out.println(ToStringBuilder.reflectionToString(dataSource2));
+		System.out.println(ToStringBuilder.reflectionToString(dataSource3));
+	}
 }

@@ -1,6 +1,5 @@
 package org.springsource.sawt.ioc.strangebeans.profiles;
 
-
 import org.h2.Driver;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +10,18 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile("production")
-public class ProductionDataSource implements DataSourceProvider, InitializingBean {
+public class ProductionDataSource implements DataSourceProvider,
+		InitializingBean {
 
-    @Override
-    public DataSource dataSource() {
-        Driver d = new Driver();
-        return new SimpleDriverDataSource(d, "jdbc:h2:tcp://localhost/~/prod_crm");
-    }
+	@Override
+	public DataSource dataSource() {
+		Driver d = new Driver();
+		return new SimpleDriverDataSource(d,
+				"jdbc:h2:tcp://localhost/~/prod_crm");
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("starting " + getClass().getName());
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("starting " + getClass().getName());
+	}
 }
